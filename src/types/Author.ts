@@ -1,9 +1,5 @@
 export interface Author {
-
-    id: number
-
-    name: string
-
-    birth_country_id: number
-
+    id: string;
+    name: string;
+    birth_country_id: string | null;
 }

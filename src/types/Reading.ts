@@ -1,25 +1,18 @@
 export interface Reading {
+    id: string;
+    book_id: string;
+    status_id: string;
 
-    id: number
+    reading_language_id: string | null;
 
-    book_id: number
+    pages_tot: number | null;
+    pages_read: number | null;
 
-    pages_tot: number
+    start_date: string | null;
+    finish_date: string | null;
 
-    pages_read: number
-
-    reading_language_id: number
-
-    start_date: string
-
-    finish_date?: string
-
-    rating?: number
-
-    review?: string
-
-    characters?: string
-
-    dnf_reason?: string
-
+    rating: number | null;
+    review: string | null;
+    characters: string | null;
+    dnf_reason: string | null;
 }

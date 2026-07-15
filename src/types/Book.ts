@@ -1,23 +1,21 @@
+import type {Author} from "./Author.ts";
+import type {Genre} from "./Genre.ts";
+import type {Reading} from "./Reading.ts";
+
 export interface Book {
+    id: string;
+    title: string;
+    author: Author;
+    genre: Genre | null;
 
-    id: number
+    publication_year: number | null;
+    original_language_id: string | null;
 
-    title: string
+    series_id: string | null;
+    series_number: number | null;
 
-    author_id: number
+    themes: string | null;
 
-    genre_id: number
-
-    cover_url: string
-
-    publication_year: number
-
-    original_language_id: number
-
-    series_id?: number
-
-    series_number?: number
-
-    themes?: string
-
+    cover_url: string | null;
+    readings: Reading[];
 }
