@@ -1,13 +1,14 @@
 import { Outlet } from "react-router-dom"
 import Sidebar from "../components/Sidebar"
+import "./AppLayout.css"
 
 function AppLayout() {
     return (
-        <div>
+        <div className="app-layout">
 
             <Sidebar />
 
-            <main>
+            <main className="main-content">
                 <Outlet />
             </main>
 

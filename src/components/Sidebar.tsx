@@ -1,52 +1,58 @@
 import { NavLink } from "react-router-dom"
 
+import {
+    FaHome,
+    FaBook,
+    FaList,
+    FaBan,
+    FaBullseye,
+    FaChartBar,
+} from "react-icons/fa"
+
+import "./Sidebar.css"
+
 function Sidebar() {
-    return (
-        <nav>
+    return(
+        <aside className="sidebar">
+            <h2 className="sidebar-title">
+                📚 BookTracker
+            </h2>
 
-            <h2>📚 BookTracker</h2>
+           <nav>
 
-            <ul>
+                <NavLink to="/" className="sidebar-link">
+                    <FaHome />
+                    <span>Home</span>
+                </NavLink>
 
-                <li>
-                    <NavLink to="/">
-                        Home
-                    </NavLink>
-                </li>
+                <NavLink to="/books" className="sidebar-link">
+                    <FaBook />
+                    <span>Books</span>
+              </NavLink>
 
-                <li>
-                    <NavLink to="/books">
-                        Books
-                    </NavLink>
-                </li>
+                <NavLink to="/tbr" className="sidebar-link">
+                    <FaList />
+                    <span>TBR</span>
+                </NavLink>
 
-                <li>
-                    <NavLink to="/tbr">
-                        TBR
-                    </NavLink>
-                </li>
+                <NavLink to="/dnf" className="sidebar-link">
+                    <FaBan />
+                    <span>DNF</span>
+              </NavLink>
 
-                <li>
-                    <NavLink to="/dnf">
-                        DNF
-                    </NavLink>
-                </li>
+                <NavLink to="/goals" className="sidebar-link">
+                    <FaBullseye />
+                    <span>Goals</span>
+               </NavLink>
 
-                <li>
-                    <NavLink to="/goals">
-                        Goals
-                    </NavLink>
-                </li>
+                <NavLink to="/statistics" className="sidebar-link">
+                    <FaChartBar />
+                   <span>Statistics</span>
+               </NavLink>
 
-                <li>
-                    <NavLink to="/statistics">
-                        Statistics
-                    </NavLink>
-                </li>
+           </nav>
 
-            </ul>
-
-        </nav>
+      </aside>
     )
 }
 
