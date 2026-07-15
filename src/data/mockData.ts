@@ -1,4 +1,5 @@
 import type { Book } from "../types/Book"
+import type {BookWithReading} from "../types/BookWithReading.ts"
 
 export const currentBook: Book = {
     id:1,
@@ -58,3 +59,33 @@ export const monthlyGoal = {
     current:3,
     target:5,
 }
+
+export const booksTable: BookWithReading[] = [
+    {
+        book: {
+            id: 1,
+            title: "The Name of the Wind",
+            author_id: 1,
+            genre_id: 2,
+            cover_url:"https://via.placeholder.com/150x220",
+            publication_year: 2007,
+            original_language_id: 1
+        },
+        author: "Patrick Rothfuss",
+        status: "Currently reading"
+    },
+
+    {
+        book: {
+            id: 2,
+            title: "Dune",
+            author_id: 2,
+            genre_id: 2,
+            cover_url:"https://via.placeholder.com/150x220",
+            publication_year: 1965,
+            original_language_id: 1
+        },
+        author: "Frank Herbert",
+        status: "Read"
+    }
+]
