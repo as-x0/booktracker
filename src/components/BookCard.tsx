@@ -1,26 +1,26 @@
+import type {Book} from "../types/Book"
 import "./BookCard.css"
 
 interface BookCardProps {
-    title: string
+    book: Book
     author: string
-    cover: string
 }
 
 
-function BookCard({ title, author, cover }: BookCardProps) {
+function BookCard({ book, author }: BookCardProps) {
 
     return (
 
         <div className="book-card">
 
             <img
-                src={cover}
-                alt={title}
+                src={book.cover_url}
+                alt={book.title}
             />
 
             <div>
 
-                <h3>{title}</h3>
+                <h3>{book.title}</h3>
 
                 <p>{author}</p>
 
