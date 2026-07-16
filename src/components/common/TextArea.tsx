@@ -1,36 +1,47 @@
+import { forwardRef } from "react";
+import "../Input.css";
+import type {
+    ChangeEventHandler,
+    FocusEventHandler
+} from "react";
+
 interface TextAreaProps {
     label: string;
-    value: string;
-    onChange: (value: string) => void;
     placeholder?: string;
     required?: boolean;
     rows?: number;
+    name?: string;
+    onChange?: ChangeEventHandler<HTMLTextAreaElement>;
+    onBlur?: FocusEventHandler<HTMLTextAreaElement>;
 }
 
-export default function TextArea({
+const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
+    function TextArea({
     label,
-    value,
-    onChange,
     placeholder,
     required = false,
-    rows = 5
-}: TextAreaProps) {
+    rows = 5,
+    name,
+    onChange,
+    onBlur
+}, ref) {
 
-    return (
-        <div>
-            <label>
-                {label}
-            </label>
+        return (
+            <div>
+                <label>{label}</label>
 
-            <textarea
-                value={value}
-                onChange={(event) =>
-                    onChange(event.target.value)
-                }
-                placeholder={placeholder}
-                required={required}
-                rows={rows}
-            />
-        </div>
-    );
-}
+                <textarea
+                    ref={ref}
+                    name={name}
+                    placeholder={placeholder}
+                    required={required}
+                    rows={rows}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                />
+            </div>
+        );
+    }
+);
+
+export default TextArea;

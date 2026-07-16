@@ -1,31 +1,42 @@
+import { forwardRef } from "react";
+import "../Input.css";
+import type {
+    ChangeEventHandler,
+    FocusEventHandler
+} from "react";
+
 interface DateInputProps {
     label: string;
-    value: string;
-    onChange: (value: string) => void;
     required?: boolean;
+    name?: string;
+    onChange?: ChangeEventHandler<HTMLInputElement>;
+    onBlur?: FocusEventHandler<HTMLInputElement>;
 }
 
-export default function DateInput({
-    label,
-    value,
-    onChange,
-    required = false
-}: DateInputProps) {
+const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
+    function DateInput({
+        label,
+        required = false,
+        name,
+        onChange,
+        onBlur
+    }, ref) {
 
-    return (
-        <div>
-            <label>
-                {label}
-            </label>
+        return (
+            <div>
+                <label>{label}</label>
 
-            <input
-                type="date"
-                value={value}
-                onChange={(event) =>
-                    onChange(event.target.value)
-                }
-                required={required}
-            />
-        </div>
-    );
-}
+                <input
+                    ref={ref}
+                    type="date"
+                    name={name}
+                    required={required}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                />
+            </div>
+        );
+    }
+);
+
+export default DateInput;
