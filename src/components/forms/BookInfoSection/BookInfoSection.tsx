@@ -1,5 +1,5 @@
 import "./BookInfoSection.css"
-
+import useGenres from "../../../hooks/useGenres.ts";
 import type {
     UseFormRegister,
     UseFormSetValue
@@ -20,12 +20,7 @@ export default function BookInfoSection({
     register,
     setValue
 }: BookInfoSectionProps) {
-
-    const genres = [
-        {id: "1", name: "Fantasy"},
-        {id: "2", name: "Dystopia / Sci-fi"},
-        {id: "3", name: "Historical"}
-    ];
+    const genres = useGenres();
 
     const languages = [
         {id: "1",name: "English"},
