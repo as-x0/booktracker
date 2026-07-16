@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import "../Input.css";
+import "./Input.css";
 import type {
     ChangeEventHandler,
     FocusEventHandler

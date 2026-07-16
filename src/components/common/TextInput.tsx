@@ -3,7 +3,7 @@ import type {
     ChangeEventHandler,
     FocusEventHandler
 } from "react";
-import "../Input.css";
+import "./Input.css";
 
 interface TextInputProps {
     label: string;

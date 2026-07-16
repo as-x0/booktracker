@@ -2,24 +2,33 @@ import { useForm } from "react-hook-form";
 
 import Button from "../../components/common/Button";
 import BookInfoSection from "../../components/forms/BookInfoSection/BookInfoSection";
+import ReadingInfoSection from "../../components/forms/ReadingInfoSection/ReadingInfoSection";
+import "./ReadingForm.css";
 
 export interface ReadingFormData {
+    //BOOK
     title: string;
-
     authorId: string;
     authorName: string;
-
     birthCountryId: string;
-
     genreId: string;
-
     publicationYear: string;
-
     originalLanguageId: string;
-
     seriesId: string;
     seriesName: string;
     seriesNumber: string;
+
+    //READING
+    statusId: string;
+    readingLanguageId: string;
+    startDate: string;
+    finishDate: string;
+    pagesTotal: string;
+    pagesRead: string;
+    rating: string;
+    review: string;
+    characters: string;
+    dnfReason: string;
 }
 
 export default function ReadingForm() {
@@ -27,6 +36,7 @@ export default function ReadingForm() {
         register,
         handleSubmit,
         setValue,
+        watch
     } = useForm<ReadingFormData>();
 
     function onSubmit(data: ReadingFormData) {
@@ -34,18 +44,28 @@ export default function ReadingForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <h2>New Reading</h2>
+        <form
+            className="reading-form"
+            onSubmit={handleSubmit(onSubmit)}
+        >
 
-            <BookInfoSection
-                register={register}
-                setValue={setValue}
-            />
+        <h2>New Reading</h2>
 
-            <Button type="submit">
-                Save
-            </Button>
+        <BookInfoSection
+            register={register}
+            setValue={setValue}
+        />
 
-        </form>
+        <ReadingInfoSection
+            register={register}
+            setValue={setValue}
+            watch={watch}
+        />
+
+        <Button type="submit">
+            Save
+        </Button>
+
+    </form>
     );
 }
