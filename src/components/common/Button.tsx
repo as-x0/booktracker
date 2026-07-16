@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import "./Button.css"
 
 interface ButtonProps {
     children: ReactNode;
@@ -6,15 +7,14 @@ interface ButtonProps {
     type?: "button" | "submit";
 }
 
-
 export default function Button({
-                                   children,
-                                   onClick,
-                                   type = "button"
-                               }: ButtonProps) {
+    children,
+    onClick,
+    type = "button"
+}: ButtonProps) {
 
     return (
-        <button
+        <button className="button"
             type={type}
             onClick={onClick}
         >

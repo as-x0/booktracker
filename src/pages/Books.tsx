@@ -2,6 +2,7 @@ import {useState} from "react";
 
 import BookTable from "../components/BookTable"
 import ReadingForm from "../forms/ReadingForm/ReadingForm.tsx";
+import Button from "../components/common/Button.tsx";
 
 import { booksTable } from "../data/mockData"
 
@@ -12,7 +13,7 @@ function Books() {
         <div>
             <h1>Books</h1>
 
-            <button
+            <Button
                 onClick={()=> setShowForm(!showForm)}
             >
                 {
@@ -20,7 +21,7 @@ function Books() {
                     ? "Close"
                     : "New Reading"
                 }
-            </button>
+            </Button>
 
             {showForm && (<ReadingForm />)}
 

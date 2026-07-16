@@ -5,13 +5,11 @@ import "./AppLayout.css"
 function AppLayout() {
     return (
         <div className="app-layout">
-
             <Sidebar />
 
             <main className="main-content">
                 <Outlet />
             </main>
-
         </div>
     )
 }

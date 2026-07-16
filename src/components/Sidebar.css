@@ -1,11 +1,17 @@
 .sidebar {
     width: 240px;
+    min-width: 240px;
     height: 100vh;
     padding: 20px;
     background-color: #f4f4f4;
+    box-sizing: border-box;
 }
 
 .sidebar-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
     margin-bottom: 30px;
 }
 
@@ -18,8 +24,8 @@
     text-decoration: none;
     color: black;
     border-radius: 8px;
+    text-decoration: none;
 }
-
 
 .sidebar-link:hover {
     background-color: #e5e5e5;
