@@ -1,33 +1,25 @@
 import { useState } from "react";
-
 export interface Option {
     id: string;
     name: string;
 }
 
-
 interface AutocompleteInputProps {
     label: string;
     options: Option[];
     onSelect: (option: Option) => void;
+    onQueryChange?: (query: string) => void;
 }
 
 export default function AutocompleteInput({
-    label,
-    options,
-    onSelect
-}: AutocompleteInputProps) {
+                                              label,
+                                              options,
+                                              onSelect,
+                                              onQueryChange
+                                          }: AutocompleteInputProps) {
 
     const [query, setQuery] = useState("");
-
     const [showOptions, setShowOptions] = useState(false);
-
-    const filteredOptions = options.filter(option =>
-        option.name
-            .toLowerCase()
-            .includes(query.toLowerCase())
-
-    );
 
     return (
         <div>
@@ -37,33 +29,36 @@ export default function AutocompleteInput({
                 type="text"
                 value={query}
                 onChange={(event)=>{
-                    setQuery(event.target.value);
+                    const value = event.target.value;
+                    setQuery(value);
                     setShowOptions(true);
+
+                    if(onQueryChange){
+                        onQueryChange(value);
+                    }
                 }}
-                onFocus={() =>
+
+                onFocus={()=>
                     setShowOptions(true)
                 }
             />
 
-            {showOptions && query && (
-                    <ul>
-                        {
-                            filteredOptions.map(option => (
-                                <li
-                                    key={option.id}
-                                    onClick={()=>{
-                                        onSelect(option);
-                                        setQuery(option.name);
-                                        setShowOptions(false);
-                                    }}
-                                >
-                                    {option.name}
-                                </li>
-                            ))
-                        }
-                    </ul>
-                )
-            }
+            {showOptions && options.length > 0 && (
+                <ul>
+                    {options.map(option => (
+                        <li
+                            key={option.id}
+                            onClick={()=>{
+                                onSelect(option);
+                                setQuery(option.name);
+                                setShowOptions(false);
+                            }}
+                        >
+                            {option.name}
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 }

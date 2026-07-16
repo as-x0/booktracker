@@ -1,21 +1,23 @@
+import "./ReadingInfoSection.css";
+
+import {useState} from "react";
+
+import useStatuses from "../../../hooks/useStatuses.ts";
+import useLanguages from "../../../hooks/useLanguages.ts";
+
 import type {
     UseFormRegister,
     UseFormSetValue,
     UseFormWatch
 } from "react-hook-form";
 
-import useStatuses from "../../../hooks/useStatuses.ts";
-
 import SelectInput from "../../common/SelectInput";
 import TextInput from "../../common/TextInput";
 import DateInput from "../../common/DateInput";
 import TextArea from "../../common/TextArea";
+import AutocompleteInput from "../../common/AutocompleteInput.tsx";
 
-import "./ReadingInfoSection.css";
-
-import type {
-    ReadingFormData
-} from "../../../forms/ReadingForm/ReadingForm";
+import type { ReadingFormData } from "../../../forms/ReadingForm/ReadingForm";
 
 interface ReadingInfoSectionProps {
     register: UseFormRegister<ReadingFormData>;
@@ -26,6 +28,7 @@ interface ReadingInfoSectionProps {
 export default function ReadingInfoSection({
     register,
     watch,
+    setValue
 }: ReadingInfoSectionProps) {
     const statuses = useStatuses();
     const status = watch("statusId");
@@ -34,11 +37,8 @@ export default function ReadingInfoSection({
     );
     const isDnf = selectedStatus?.name === "DNF";
 
-    const languages = [
-        {id: "english", name: "English"},
-        {id: "italian", name: "Italian"},
-        {id: "german", name: "German"}
-    ];
+    const [languageQuery, setLanguageQuery] = useState("");
+    const languages = useLanguages(languageQuery);
 
     return (
         <section className="reading-info-section">
@@ -53,10 +53,16 @@ export default function ReadingInfoSection({
                     {...register("statusId")}
                 />
 
-                <SelectInput
+                <AutocompleteInput
                     label="Reading language"
                     options={languages}
-                    {...register("readingLanguageId")}
+                    onQueryChange={(query)=>{setLanguageQuery(query);}}
+                    onSelect={(language)=>{
+                        setValue(
+                            "readingLanguageId",
+                            language.id
+                        );
+                    }}
                 />
 
                 <DateInput

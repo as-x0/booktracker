@@ -1,5 +1,10 @@
+import {useState} from "react";
+
 import "./BookInfoSection.css"
+
 import useGenres from "../../../hooks/useGenres.ts";
+import useLanguages from "../../../hooks/useLanguages.ts";
+
 import type {
     UseFormRegister,
     UseFormSetValue
@@ -22,11 +27,8 @@ export default function BookInfoSection({
 }: BookInfoSectionProps) {
     const genres = useGenres();
 
-    const languages = [
-        {id: "1",name: "English"},
-        {id: "2",name: "Italian"},
-        {id: "3",name: "German"}
-    ];
+    const [languageQuery, setLanguageQuery] = useState("");
+    const languages = useLanguages(languageQuery);
 
     const authors = [
         {id: "1", name: "Frank Herbert"},
@@ -93,10 +95,18 @@ export default function BookInfoSection({
                     {...register("publicationYear")}
                 />
 
-                <SelectInput
+                <AutocompleteInput
                     label="Original language"
                     options={languages}
-                    {...register("originalLanguageId")}
+                    onQueryChange={(query)=>{
+                        setLanguageQuery(query);
+                    }}
+                    onSelect={(language)=>{
+                        setValue(
+                            "originalLanguageId",
+                            language.id
+                        );
+                    }}
                 />
 
                 <AutocompleteInput
