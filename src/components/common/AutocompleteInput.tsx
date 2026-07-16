@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-interface Option {
+export interface Option {
     id: string;
-    label: string;
+    name: string;
 }
 
 
@@ -23,7 +23,7 @@ export default function AutocompleteInput({
     const [showOptions, setShowOptions] = useState(false);
 
     const filteredOptions = options.filter(option =>
-        option.label
+        option.name
             .toLowerCase()
             .includes(query.toLowerCase())
 
@@ -31,9 +31,7 @@ export default function AutocompleteInput({
 
     return (
         <div>
-            <label>
-                {label}
-            </label>
+            <label>{label}</label>
 
             <input
                 type="text"
@@ -47,8 +45,7 @@ export default function AutocompleteInput({
                 }
             />
 
-            {
-                showOptions && query && (
+            {showOptions && query && (
                     <ul>
                         {
                             filteredOptions.map(option => (
@@ -56,11 +53,11 @@ export default function AutocompleteInput({
                                     key={option.id}
                                     onClick={()=>{
                                         onSelect(option);
-                                        setQuery(option.label);
+                                        setQuery(option.name);
                                         setShowOptions(false);
                                     }}
                                 >
-                                    {option.label}
+                                    {option.name}
                                 </li>
                             ))
                         }

@@ -7,7 +7,6 @@ import {
     monthlyGoal
 } from "../data/mockData"
 
-
 function Home() {
     return (
         <div>
@@ -59,11 +58,8 @@ function Home() {
                     }
                 </div>
             </section>
-
         </div>
-
     )
-
 }
 
 

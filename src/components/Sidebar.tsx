@@ -19,7 +19,6 @@ function Sidebar() {
             </h2>
 
            <nav>
-
                 <NavLink to="/" className="sidebar-link">
                     <FaHome />
                     <span>Home</span>
@@ -49,9 +48,7 @@ function Sidebar() {
                     <FaChartBar />
                    <span>Statistics</span>
                </NavLink>
-
            </nav>
-
       </aside>
     )
 }

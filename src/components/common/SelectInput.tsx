@@ -1,6 +1,6 @@
-interface SelectOption {
-    value: string;
-    label: string;
+export interface SelectOption {
+    id: string;
+    name: string;
 }
 
 
@@ -12,7 +12,6 @@ interface SelectInputProps {
     required?: boolean;
 }
 
-
 export default function SelectInput({
     label,
     value,
@@ -23,15 +22,12 @@ export default function SelectInput({
 
     return (
         <div>
-            <label>
-                {label}
-            </label>
+            <label>{label}</label>
 
             <select
                 value={value}
                 onChange={(event) =>
-                    onChange(event.target.value)
-                }
+                    onChange(event.target.value)}
                 required={required}
             >
 
@@ -39,13 +35,12 @@ export default function SelectInput({
                     Select...
                 </option>
 
-                {
-                    options.map((option) => (
+                {options.map((option) => (
                         <option
-                            key={option.value}
-                            value={option.value}
+                            key={option.id}
+                            value={option.id}
                         >
-                            {option.label}
+                            {option.name}
                         </option>
                     ))
                 }

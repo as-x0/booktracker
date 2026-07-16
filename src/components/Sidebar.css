@@ -1,55 +1,31 @@
 .sidebar {
-
     width: 240px;
-
     height: 100vh;
-
     padding: 20px;
-
     background-color: #f4f4f4;
-
 }
-
 
 .sidebar-title {
-
     margin-bottom: 30px;
-
 }
 
-
 .sidebar-link {
-
     display: flex;
-
     align-items: center;
-
     gap: 12px;
-
     padding: 10px;
-
     margin-bottom: 8px;
-
     text-decoration: none;
-
     color: black;
-
     border-radius: 8px;
-
 }
 
 
 .sidebar-link:hover {
-
     background-color: #e5e5e5;
-
 }
 
-
 .sidebar-link.active {
-
     background-color: #dcdcdc;
-
     font-weight: bold;
-
 }
