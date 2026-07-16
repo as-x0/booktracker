@@ -4,6 +4,8 @@ import type {
     UseFormWatch
 } from "react-hook-form";
 
+import useStatuses from "../../../hooks/useStatuses.ts";
+
 import SelectInput from "../../common/SelectInput";
 import TextInput from "../../common/TextInput";
 import DateInput from "../../common/DateInput";
@@ -23,23 +25,20 @@ interface ReadingInfoSectionProps {
 
 export default function ReadingInfoSection({
     register,
-    watch
+    watch,
 }: ReadingInfoSectionProps) {
-
-    const statuses = [
-        {id: "currently-reading", name: "Currently Reading"},
-        {id: "read", name: "Read"},
-        {id: "re-read", name: "Re-read"},
-        {id: "dnf", name: "DNF"}
-    ];
+    const statuses = useStatuses();
+    const status = watch("statusId");
+    const selectedStatus = statuses.find(
+        item => item.id === status
+    );
+    const isDnf = selectedStatus?.name === "DNF";
 
     const languages = [
         {id: "english", name: "English"},
         {id: "italian", name: "Italian"},
         {id: "german", name: "German"}
     ];
-
-    const status = watch("statusId");
 
     return (
         <section className="reading-info-section">
@@ -98,7 +97,7 @@ export default function ReadingInfoSection({
                     {...register("characters")}
                 />
 
-                {status === "dnf" && (
+                {isDnf && (
                     <TextArea
                         label="DNF reason"
                         {...register("dnfReason")}
