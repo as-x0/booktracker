@@ -12,20 +12,26 @@ export interface ReadingFormData {
     authorName: string;
     birthCountryId: string;
     genreId: string;
-    publicationYear: string;
+
+    publicationYear: number;
+
     originalLanguageId: string;
+
     seriesId: string;
     seriesName: string;
-    seriesNumber: string;
+    seriesNumber: number;
 
     //READING
     statusId: string;
     readingLanguageId: string;
+
     startDate: string;
     finishDate: string;
-    pagesTotal: string;
-    pagesRead: string;
-    rating: string;
+
+    pagesTotal: number;
+    pagesRead: number;
+
+    rating: number;
     review: string;
     characters: string;
     dnfReason: string;

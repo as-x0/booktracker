@@ -78,19 +78,19 @@ export default function ReadingInfoSection({
                 <TextInput
                     label="Total pages"
                     type="number"
-                    {...register("pagesTotal")}
+                    {...register("pagesTotal", {valueAsNumber:true})}
                 />
 
                 <TextInput
                     label="Pages read"
                     type="number"
-                    {...register("pagesRead")}
+                    {...register("pagesRead", {valueAsNumber:true})}
                 />
 
                 <TextInput
                     label="Rating"
                     type="number"
-                    {...register("rating")}
+                    {...register("rating", {valueAsNumber:true})}
                 />
 
                 <TextArea

@@ -80,7 +80,7 @@ export default function BookInfoSection({
                 <TextInput
                     label="Publication year"
                     type="number"
-                    {...register("publicationYear")}
+                    {...register("publicationYear", {valueAsNumber:true})}
                 />
 
                 <AutocompleteInput
@@ -105,7 +105,7 @@ export default function BookInfoSection({
                 <TextInput
                     label="Series number"
                     type="number"
-                    {...register("seriesNumber")}
+                    {...register("seriesNumber", {valueAsNumber:true})}
                 />
             </div>
 
