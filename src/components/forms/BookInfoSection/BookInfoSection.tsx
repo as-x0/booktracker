@@ -4,6 +4,7 @@ import useGenres from "../../../hooks/useGenres.ts";
 import useLanguages from "../../../hooks/useLanguages.ts";
 import useAuthors from "../../../hooks/useAuthors.ts";
 import useCountries from "../../../hooks/useCountries.ts";
+import useSeries from "../../../hooks/useSeries.ts";
 
 import "./BookInfoSection.css"
 
@@ -38,10 +39,8 @@ export default function BookInfoSection({
     const [countryQuery, setCountryQuery] = useState("");
     const countries = useCountries(countryQuery);
 
-    const series = [
-        {id: "1", name: "Dune"},
-        {id: "2", name: "Lord of the Rings"}
-    ];
+    const [serieQuery, setSerieQuery] = useState("");
+    const series = useSeries(serieQuery)
 
     return (
         <section className="book-info-section">
@@ -69,9 +68,7 @@ export default function BookInfoSection({
                     label="Birth country"
                     options={countries}
                     onQueryChange={setCountryQuery}
-                    onSelect={(country)=>{
-                        setValue("birthCountryId", country.id);
-                    }}
+                    onSelect={(country)=>{setValue("birthCountryId", country.id);}}
                 />
 
                 <SelectInput
@@ -89,29 +86,19 @@ export default function BookInfoSection({
                 <AutocompleteInput
                     label="Original language"
                     options={languages}
-                    onQueryChange={(query)=>{
-                        setLanguageQuery(query);
-                    }}
+                    onQueryChange={(query)=>{setLanguageQuery(query);}}
                     onSelect={(language)=>{
-                        setValue(
-                            "originalLanguageId",
-                            language.id
-                        );
+                        setValue("originalLanguageId", language.id);
                     }}
                 />
 
                 <AutocompleteInput
                     label="Series"
                     options={series}
+                    onQueryChange={setSerieQuery}
                     onSelect={(series)=>{
-                        setValue(
-                            "seriesId",
-                            series.id
-                        );
-                        setValue(
-                            "seriesName",
-                            series.name
-                        );
+                        setValue("seriesId", series.id);
+                        setValue("seriesName", series.name);
                     }}
                 />
 
