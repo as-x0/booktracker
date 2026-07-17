@@ -1,9 +1,10 @@
 import {useState} from "react";
 
-import "./BookInfoSection.css"
-
 import useGenres from "../../../hooks/useGenres.ts";
 import useLanguages from "../../../hooks/useLanguages.ts";
+import useAuthors from "../../../hooks/useAuthors.ts";
+
+import "./BookInfoSection.css"
 
 import type {
     UseFormRegister,
@@ -30,10 +31,8 @@ export default function BookInfoSection({
     const [languageQuery, setLanguageQuery] = useState("");
     const languages = useLanguages(languageQuery);
 
-    const authors = [
-        {id: "1", name: "Frank Herbert"},
-        {id: "2", name: "J.R.R. Tolkien"}
-    ];
+    const[authorQuery, setAuthorQuery] = useState("");
+    const authors = useAuthors(authorQuery);
 
     const countries = [
         {id: "1", name: "United States"},
@@ -60,15 +59,10 @@ export default function BookInfoSection({
                 <AutocompleteInput
                     label="Author"
                     options={authors}
+                    onQueryChange={setAuthorQuery}
                     onSelect={(author)=>{
-                        setValue(
-                            "authorId",
-                            author.id
-                        );
-                        setValue(
-                            "authorName",
-                            author.name
-                        );
+                        setValue("authorId", author.id);
+                        setValue("authorName", author.name);
                     }}
                 />
 
