@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "./AutocompleteInput.css";
+
 export interface Option {
     id: string;
     name: string;
@@ -22,7 +24,7 @@ export default function AutocompleteInput({
     const [showOptions, setShowOptions] = useState(false);
 
     return (
-        <div>
+        <div className="autocomplete">
             <label>{label}</label>
 
             <input
@@ -44,9 +46,9 @@ export default function AutocompleteInput({
             />
 
             {showOptions && options.length > 0 && (
-                <ul>
+                <ul className="autocomplete-list">
                     {options.map(option => (
-                        <li
+                        <li className="autocomplete-item"
                             key={option.id}
                             onClick={()=>{
                                 onSelect(option);
