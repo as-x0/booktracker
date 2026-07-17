@@ -3,6 +3,7 @@ import {useState} from "react";
 import useGenres from "../../../hooks/useGenres.ts";
 import useLanguages from "../../../hooks/useLanguages.ts";
 import useAuthors from "../../../hooks/useAuthors.ts";
+import useCountries from "../../../hooks/useCountries.ts";
 
 import "./BookInfoSection.css"
 
@@ -34,10 +35,8 @@ export default function BookInfoSection({
     const[authorQuery, setAuthorQuery] = useState("");
     const authors = useAuthors(authorQuery);
 
-    const countries = [
-        {id: "1", name: "United States"},
-        {id: "2", name: "United Kingdom"}
-    ];
+    const [countryQuery, setCountryQuery] = useState("");
+    const countries = useCountries(countryQuery);
 
     const series = [
         {id: "1", name: "Dune"},
@@ -69,11 +68,9 @@ export default function BookInfoSection({
                 <AutocompleteInput
                     label="Birth country"
                     options={countries}
+                    onQueryChange={setCountryQuery}
                     onSelect={(country)=>{
-                        setValue(
-                            "birthCountryId",
-                            country.id
-                        );
+                        setValue("birthCountryId", country.id);
                     }}
                 />
 
