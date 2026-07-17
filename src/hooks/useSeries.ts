@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { searchSeries } from "../services/serieService";
+import { searchSeries } from "../services/seriesService.ts";
 import type { Series } from "../types/Series";
 
 export default function useSeries(query: string) {
