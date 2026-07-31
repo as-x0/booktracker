@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import Button from "../../components/common/Button";
@@ -45,21 +46,41 @@ export default function ReadingForm() {
         register,
         handleSubmit,
         setValue,
-        watch
+        watch,
+        reset
     } = useForm<ReadingFormData>({
         shouldUnregister: false
     });
 
+    const [message, setMessage] = useState<{
+        type: "success" | "error";
+        text: string;
+    } | null>(null);
+
     async function onSubmit(data: ReadingFormData) {
         console.log("FORM DATA:", data);
+
         try {
+            setMessage(null);
+
             const readingId = await saveReading(data);
+
             console.log(
                 "Reading created:",
                 readingId
             );
+
+            setMessage({
+                type: "success",
+                text: "Reading saved successfully",
+            });
+            reset();
         } catch(error) {
             console.error(error);
+            setMessage({
+                type: "error",
+                text: "Error while saving reading",
+            })
         }
     }
 
@@ -81,6 +102,12 @@ export default function ReadingForm() {
             setValue={setValue}
             watch={watch}
         />
+
+        {message && (
+            <p className={`form-message ${message.type}`}>
+                {message.text}
+            </p>
+        )}
 
         <Button type="submit">
             Save
