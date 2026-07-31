@@ -11,16 +11,16 @@ import "./ReadingForm.css";
 export interface ReadingFormData {
     //BOOK
     title: string;
-    authorId: string;
+
     authorName: string;
-    birthCountryId: string;
+    birthCountryName: string;
+
     genreId: string;
 
     publicationYear: number;
 
     originalLanguageId: string;
 
-    seriesId: string;
     seriesName: string;
     seriesNumber: number;
 

@@ -3,11 +3,16 @@ import type { ReadingFormData } from "../forms/ReadingForm/ReadingForm";
 import { findOrCreateAuthor } from "./authorService";
 import { findOrCreateBook } from "./bookService";
 import { createReading } from "./readingService";
+import { findOrCreateCountry } from "./countryService.ts";
 
 export async function saveReading(data: ReadingFormData) {
+    const countryId = await findOrCreateCountry(
+        data.birthCountryName
+    )
+
     const authorId = await findOrCreateAuthor(
         data.authorName,
-        data.birthCountryId
+        countryId
     );
 
     const bookId = await findOrCreateBook({

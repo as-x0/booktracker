@@ -22,3 +22,34 @@ export async function searchCountries(
 
     return data ?? [];
 }
+
+export async function findOrCreateCountry(
+    name: string
+): Promise<string> {
+
+    const { data: existing, error: searchError } = await supabase
+        .from("countries")
+        .select("id")
+        .eq("name", name)
+        .maybeSingle();
+
+    if(searchError){
+        throw searchError;
+    }
+
+    if(existing){
+        return existing.id;
+    }
+
+    const {data: created, error: insertError} = await supabase
+        .from("countries")
+        .insert({name,})
+        .select("id")
+        .single();
+
+    if(insertError){
+        throw insertError;
+    }
+
+    return created.id;
+}

@@ -57,9 +57,11 @@ export default function BookInfoSection({
                 <AutocompleteInput
                     label="Author"
                     options={authors}
-                    onQueryChange={setAuthorQuery}
+                    onQueryChange={(value)=>{
+                        setAuthorQuery(value);
+                        setValue("authorName", value);
+                    }}
                     onSelect={(author)=>{
-                        setValue("authorId", author.id);
                         setValue("authorName", author.name);
                     }}
                 />
@@ -67,8 +69,16 @@ export default function BookInfoSection({
                 <AutocompleteInput
                     label="Birth country"
                     options={countries}
-                    onQueryChange={setCountryQuery}
-                    onSelect={(country)=>{setValue("birthCountryId", country.id);}}
+                    onQueryChange={(value)=>{
+                        setCountryQuery(value);
+                        setValue("birthCountryName", value);
+                    }}
+                    onSelect={(country)=>{
+                        setValue(
+                            "birthCountryName",
+                            country.name,
+                        );
+                    }}
                 />
 
                 <SelectInput
