@@ -35,10 +35,6 @@ export default function AutocompleteInput({
                     setQuery(value);
                     onQueryChange?.(value);
                     setShowOptions(true);
-
-                    if(onQueryChange){
-                        onQueryChange(value);
-                    }
                 }}
 
                 onFocus={()=>

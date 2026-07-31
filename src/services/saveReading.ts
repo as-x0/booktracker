@@ -16,6 +16,10 @@ export async function saveReading(data: ReadingFormData) {
         countryId
     );
 
+    console.log(
+        "SERIES NAME:",
+        data.seriesName
+    );
     const seriesId = await findOrCreateSeries(
         data.seriesName,
     );

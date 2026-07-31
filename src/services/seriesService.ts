@@ -13,7 +13,7 @@ export async function searchSeries(
         .from("series")
         .select("*")
         .ilike("name", `%${query}%`)
-        .order("title")
+        .order("name")
         .limit(10);
 
     if (error) {

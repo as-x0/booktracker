@@ -105,10 +105,41 @@ export default function BookInfoSection({
                 <AutocompleteInput
                     label="Series"
                     options={series}
-                    onQueryChange={setSerieQuery}
-                    onSelect={(series)=>{
-                        setValue("seriesId", series.id);
-                        setValue("seriesName", series.name);
+                    onQueryChange={(value)=>{
+                        setSerieQuery(value);
+                        setValue(
+                            "seriesName",
+                            value,
+                            {
+                                shouldDirty: true,
+                                shouldValidate: true
+                            }
+
+                        );
+                    }}
+                    // onQueryChange={(value)=>{
+                    //     console.log("SERIES INPUT:", value);
+                    //
+                    //     setSerieQuery(value);
+                    //     setValue(
+                    //         "seriesName",
+                    //         value
+                    //     );
+                    //
+                    //     console.log(
+                    //         "SERIES WATCH AFTER SET:",
+                    //         value
+                    //     );
+                    // }}
+                    onSelect={(serie)=>{
+                        setValue(
+                            "seriesName",
+                            serie.name,
+                            {
+                                shouldDirty: true,
+                                shouldValidate: true
+                            }
+                        );
                     }}
                 />
 

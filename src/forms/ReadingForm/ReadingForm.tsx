@@ -46,7 +46,9 @@ export default function ReadingForm() {
         handleSubmit,
         setValue,
         watch
-    } = useForm<ReadingFormData>();
+    } = useForm<ReadingFormData>({
+        shouldUnregister: false
+    });
 
     async function onSubmit(data: ReadingFormData) {
         console.log("FORM DATA:", data);
