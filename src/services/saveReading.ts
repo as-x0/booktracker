@@ -42,7 +42,7 @@ export async function saveReading(data: ReadingFormData) {
         pagesRead:data.pagesRead,
         startDate:data.startDate,
         finishDate:data.finishDate || null,
-        rating:data.rating ? Number(data.rating) : null,
+        rating:data.rating ?? null,
         review:data.review || null,
         characters:data.characters || null,
         dnfReason:data.dnfReason || null

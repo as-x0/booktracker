@@ -14,6 +14,7 @@ import type {
 import SelectInput from "../../common/SelectInput";
 import TextInput from "../../common/TextInput";
 import DateInput from "../../common/DateInput";
+import RatingInput from "../../common/RatingInput/RatingInput.tsx";
 import TextArea from "../../common/TextArea";
 import AutocompleteInput from "../../common/AutocompleteInput.tsx";
 
@@ -40,17 +41,7 @@ export default function ReadingInfoSection({
     const [languageQuery, setLanguageQuery] = useState("");
     const languages = useLanguages(languageQuery);
 
-    const ratingOptions = Array.from(
-        { length: 11 },
-        (_, index) => {
-            const value = index / 2;
-
-            return{
-                id: value.toString(),
-                name: value.toString()
-            };
-        }
-    );
+    const rating = watch("rating");
 
     return (
         <section className="reading-info-section">
@@ -99,10 +90,16 @@ export default function ReadingInfoSection({
                     {...register("pagesRead", {valueAsNumber:true})}
                 />
 
-                <SelectInput
+                <RatingInput
                     label="Rating"
-                    options={ratingOptions}
-                    {...register("rating")}
+                    value={
+                        rating
+                            ? Number(rating)
+                            : null
+                    }
+                    onChange={(value)=>
+                        setValue("rating", value)
+                    }
                 />
 
                 <TextArea

@@ -1,0 +1,29 @@
+.rating-input {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stars {
+    display: flex;
+    gap: 6px;
+    font-size: 28px;
+}
+
+.star {
+    cursor: pointer;
+    transition:
+            transform 0.15s ease;
+}
+
+.star:hover {
+    transform: scale(1.1);
+}
+
+.empty-star {
+    opacity: 0.25;
+}
+
+.rating-value {
+    font-size: 14px;
+}
