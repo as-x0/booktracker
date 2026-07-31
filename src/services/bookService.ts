@@ -21,15 +21,17 @@ export async function getBooks(): Promise<Book[]> {
 export async function findOrCreateBook(
     data: {
         title: string;
+
         authorId: string;
+
         genreId: string;
+        themes?: string;
+
         publicationYear: number;
         originalLanguageId: string;
 
         seriesId?: string | null;
         seriesNumber?: number;
-
-        themes?: string;
     }
 ): Promise<string> {
 
@@ -62,11 +64,11 @@ export async function findOrCreateBook(
             title: data.title,
             author_id: data.authorId,
             genre_id: data.genreId,
+            themes: data.themes ?? null,
             publication_year: data.publicationYear,
             original_language_id: data.originalLanguageId,
             series_id: data.seriesId ?? null,
-            series_number: data.seriesNumber ?? null,
-            themes: data.themes ?? null
+            series_number: data.seriesNumber ?? null
         })
         .select("id")
         .single();

@@ -17,9 +17,9 @@ export interface ReadingFormData {
     birthCountryName: string;
 
     genreId: string;
+    themes: string;
 
     publicationYear: number;
-
     originalLanguageId: string;
 
     seriesName: string;

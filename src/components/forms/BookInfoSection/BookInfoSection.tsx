@@ -93,6 +93,11 @@ export default function BookInfoSection({
                 />
 
                 <TextInput
+                    label="Themes"
+                    {...register("themes")}
+                />
+
+                <TextInput
                     label="Publication year"
                     type="number"
                     {...register("publicationYear", {valueAsNumber:true})}

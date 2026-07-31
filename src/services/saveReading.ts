@@ -28,6 +28,7 @@ export async function saveReading(data: ReadingFormData) {
         title: data.title,
         authorId,
         genreId: data.genreId,
+        themes: data.themes,
         publicationYear: data.publicationYear,
         originalLanguageId: data.originalLanguageId,
         seriesId,
