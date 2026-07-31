@@ -51,7 +51,7 @@ export async function saveReading(data: ReadingFormData) {
         review:data.review || null,
         characters:data.characters || null,
         dnfReason:data.dnfReason || null,
-        coverUrl: data.coverUrl,
+        coverUrl: data.coverUrl || null
     });
 
     return readingId;

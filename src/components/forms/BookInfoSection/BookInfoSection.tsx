@@ -144,6 +144,11 @@ export default function BookInfoSection({
                     type="number"
                     {...register("seriesNumber", {valueAsNumber:true})}
                 />
+
+                <TextInput
+                    label="Cover URL"
+                    {...register("coverUrl")}
+                />
             </div>
 
         </section>
