@@ -122,20 +122,6 @@ export default function BookInfoSection({
 
                         );
                     }}
-                    // onQueryChange={(value)=>{
-                    //     console.log("SERIES INPUT:", value);
-                    //
-                    //     setSerieQuery(value);
-                    //     setValue(
-                    //         "seriesName",
-                    //         value
-                    //     );
-                    //
-                    //     console.log(
-                    //         "SERIES WATCH AFTER SET:",
-                    //         value
-                    //     );
-                    // }}
                     onSelect={(serie)=>{
                         setValue(
                             "seriesName",

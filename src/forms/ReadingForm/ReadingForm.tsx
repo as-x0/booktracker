@@ -94,6 +94,7 @@ export default function ReadingForm() {
 
         <BookInfoSection
             register={register}
+            watch={watch}
             setValue={setValue}
         />
 

@@ -1,36 +1,25 @@
-import type {Book} from "../types/Book"
+import type { ReadingWithDetails } from "../types/ReadingWithDetails.ts";
 import "./BookCard.css"
 
 interface BookCardProps {
-    book: Book
-    author: string
+    reading: ReadingWithDetails;
 }
 
-
-function BookCard({ book, author }: BookCardProps) {
+function BookCard({reading}: BookCardProps) {
+    const book = reading.book;
 
     return (
-
         <div className="book-card">
-
             <img
-                src={book.cover_url}
+                src={book.cover_url ?? ""}
                 alt={book.title}
             />
-
             <div>
-
                 <h3>{book.title}</h3>
-
-                <p>{author}</p>
-
+                <p>{book.author.name}</p>
             </div>
-
         </div>
-
     )
-
 }
-
 
 export default BookCard
