@@ -40,6 +40,18 @@ export default function ReadingInfoSection({
     const [languageQuery, setLanguageQuery] = useState("");
     const languages = useLanguages(languageQuery);
 
+    const ratingOptions = Array.from(
+        { length: 11 },
+        (_, index) => {
+            const value = index / 2;
+
+            return{
+                id: value.toString(),
+                name: value.toString()
+            };
+        }
+    );
+
     return (
         <section className="reading-info-section">
             <h3>
@@ -87,10 +99,10 @@ export default function ReadingInfoSection({
                     {...register("pagesRead", {valueAsNumber:true})}
                 />
 
-                <TextInput
+                <SelectInput
                     label="Rating"
-                    type="number"
-                    {...register("rating", {valueAsNumber:true})}
+                    options={ratingOptions}
+                    {...register("rating")}
                 />
 
                 <TextArea
