@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import Button from "../../components/common/Button";
 import BookInfoSection from "../../components/forms/BookInfoSection/BookInfoSection";
 import ReadingInfoSection from "../../components/forms/ReadingInfoSection/ReadingInfoSection";
+
+import {saveReading} from "../../services/saveReading.ts";
+
 import "./ReadingForm.css";
 
 export interface ReadingFormData {
@@ -45,8 +48,17 @@ export default function ReadingForm() {
         watch
     } = useForm<ReadingFormData>();
 
-    function onSubmit(data: ReadingFormData) {
-        console.log(data);
+    async function onSubmit(data: ReadingFormData) {
+        console.log("FORM DATA:", data);
+        try {
+            const readingId = await saveReading(data);
+            console.log(
+                "Reading created:",
+                readingId
+            );
+        } catch(error) {
+            console.error(error);
+        }
     }
 
     return (

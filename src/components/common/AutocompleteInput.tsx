@@ -33,6 +33,7 @@ export default function AutocompleteInput({
                 onChange={(event)=>{
                     const value = event.target.value;
                     setQuery(value);
+                    onQueryChange?.(value);
                     setShowOptions(true);
 
                     if(onQueryChange){
