@@ -1,6 +1,5 @@
 import type {Author} from "./Author.ts";
 import type {Genre} from "./Genre.ts";
-import type {Reading} from "./Reading.ts";
 
 export interface Book {
     id: string;
@@ -17,5 +16,4 @@ export interface Book {
     themes: string | null;
 
     cover_url: string | null;
-    readings: Reading[];
 }

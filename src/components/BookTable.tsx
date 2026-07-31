@@ -1,46 +1,35 @@
-import type { BookWithReading } from "../types/BookWithReading"
-
+import type { ReadingWithDetails } from "../types/ReadingWithDetails.ts";
 import "./BookTable.css"
 
 interface BookTableProps {
-    books: BookWithReading[]
+    readings: ReadingWithDetails[];
 }
 
-
 function BookTable({
-                       books
+                       readings
                    }: BookTableProps) {
 
     return (
         <table className="book-table">
+
             <thead>
             <tr>
-                <th>
-                    Title
-                </th>
-                <th>
-                    Author
-                </th>
-                <th>
-                    Status
-                </th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Status</th>
             </tr>
             </thead>
 
             <tbody>
             {
-                books.map(
-                    (item)=>(
-                        <tr key={item.book.id}>
-                            <td>
-                                {item.book.title}
-                            </td>
-                            <td>
-                                {item.author}
-                            </td>
-                            <td>
-                                {item.status}
-                            </td>
+                readings.map(
+                    (reading)=>(
+                        <tr key={reading.id}>
+                            <td>{reading.book.title}</td>
+
+                            <td>{reading.book.author.name}</td>
+
+                            <td>{reading.status.name}</td>
                         </tr>
                     )
                 )
@@ -50,5 +39,4 @@ function BookTable({
     )
 }
 
-
-export default BookTable
+export default BookTable;

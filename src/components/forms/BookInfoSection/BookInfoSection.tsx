@@ -10,7 +10,7 @@ import "./BookInfoSection.css"
 
 import type {
     UseFormRegister,
-    UseFormSetValue
+    UseFormSetValue, UseFormWatch
 } from "react-hook-form";
 
 import TextInput from "../../common/TextInput.tsx";
@@ -21,11 +21,13 @@ import type { ReadingFormData } from "../../../forms/ReadingForm/ReadingForm";
 
 interface BookInfoSectionProps {
     register: UseFormRegister<ReadingFormData>;
+    watch: UseFormWatch<ReadingFormData>;
     setValue: UseFormSetValue<ReadingFormData>;
 }
 
 export default function BookInfoSection({
     register,
+    watch,
     setValue
 }: BookInfoSectionProps) {
     const genres = useGenres();
@@ -84,7 +86,10 @@ export default function BookInfoSection({
                 <SelectInput
                     label="Genre"
                     options={genres}
-                    {...register("genreId")}
+                    value={watch("genreId")}
+                    onChange={(value) =>
+                        setValue("genreId", value)
+                    }
                 />
 
                 <TextInput

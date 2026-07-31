@@ -1,10 +1,5 @@
 import BookCard from "../components/BookCard"
 import GoalProgress from "../components/GoalProgress"
-import {
-    currentBook,
-    recentBooks,
-    monthlyGoal
-} from "../data/mockData"
 
 function Home() {
     return (

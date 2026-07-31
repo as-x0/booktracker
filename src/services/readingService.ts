@@ -1,4 +1,5 @@
 import { supabase } from "../supabase/client";
+import type { ReadingWithDetails } from "../types/ReadingWithDetails.ts";
 
 export interface CreateReadingData {
     bookId: string;
@@ -41,4 +42,26 @@ export async function createReading(data: CreateReadingData) {
     }
 
     return reading.id;
+}
+
+export async function getReadings(): Promise<ReadingWithDetails[]>{
+    const {data, error} = await supabase
+        .from("readings")
+        .select(`
+            *,
+            book:books(
+                *,
+                author:authors(*),
+                genre:genres(*)
+            ),
+            status:reading_status(*)
+        `);
+
+    if(error){
+        throw error;
+    }
+
+    console.log(data);
+
+    return data as ReadingWithDetails[];
 }

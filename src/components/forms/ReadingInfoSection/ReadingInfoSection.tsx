@@ -53,7 +53,10 @@ export default function ReadingInfoSection({
                 <SelectInput
                     label="Status"
                     options={statuses}
-                    {...register("statusId")}
+                    value={watch("statusId")}
+                    onChange={(value) =>
+                        setValue("statusId", value)
+                    }
                 />
 
                 <AutocompleteInput
