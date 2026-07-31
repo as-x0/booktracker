@@ -1,6 +1,5 @@
 import { supabase } from "../supabase/client";
 import type { Book } from "../types/Book";
-import {findOrCreateSeries} from "./seriesService.ts";
 
 export async function getBooks(): Promise<Book[]> {
     const { data, error } = await supabase
@@ -27,19 +26,12 @@ export async function findOrCreateBook(
         publicationYear: number;
         originalLanguageId: string;
 
-        seriesName?: string;
+        seriesId?: string | null;
         seriesNumber?: number;
 
         themes?: string;
     }
 ): Promise<string> {
-    let seriesId = null;
-
-    if(data.seriesName){
-        seriesId = await findOrCreateSeries(
-            data.seriesName
-        );
-    }
 
     const { data: existingBook, error: searchError } = await supabase
         .from("books")
@@ -72,7 +64,7 @@ export async function findOrCreateBook(
             genre_id: data.genreId,
             publication_year: data.publicationYear,
             original_language_id: data.originalLanguageId,
-            series_id: seriesId,
+            series_id: data.seriesId ?? null,
             series_number: data.seriesNumber ?? null,
             themes: data.themes ?? null
         })

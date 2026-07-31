@@ -12,7 +12,7 @@ export async function searchSeries(
     const { data, error } = await supabase
         .from("series")
         .select("*")
-        .ilike("title", `%${query}%`)
+        .ilike("name", `%${query}%`)
         .order("title")
         .limit(10);
 
@@ -23,11 +23,20 @@ export async function searchSeries(
     return data ?? [];
 }
 
-export async function findOrCreateSeries(name: string): Promise<string> {
+export async function findOrCreateSeries(
+    name: string
+): Promise<string | null> {
+
+    if(!name || !name.trim()){
+        return null;
+    }
+
+    const  cleanName = name.trim();
+
     const {data:existingSeries, error:searchError} = await supabase
         .from("series")
         .select("id")
-        .eq("name", name)
+        .eq("name", cleanName)
         .maybeSingle();
 
     if(searchError) {
@@ -40,7 +49,7 @@ export async function findOrCreateSeries(name: string): Promise<string> {
 
     const {data:newSeries, error:insertError} = await supabase
         .from("series")
-        .insert({name})
+        .insert({name: cleanName})
         .select("id")
         .single();
 
