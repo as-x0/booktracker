@@ -15,4 +15,6 @@ export interface Reading {
     review: string | null;
     characters: string | null;
     dnf_reason: string | null;
+
+    cover_url: string | null;
 }

@@ -241,3 +241,26 @@ on wishlist
 for all
 using (true)
 with check (true);
+
+
+
+---------------------------------------------------------------------------------
+
+-- MIGRAZIONE COVER_URL
+-- 1. Aggiunge cover_url alla tabella readings
+alter table readings
+    add column cover_url text;
+
+
+-- 2. Copia eventuali copertine già presenti nei libri
+-- nella relativa reading
+update readings
+set cover_url = books.cover_url
+    from books
+where readings.book_id = books.id
+  and books.cover_url is not null;
+
+
+-- 3. Rimuove cover_url da books
+alter table books
+drop column cover_url;

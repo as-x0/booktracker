@@ -14,6 +14,4 @@ export interface Book {
     series_number: number | null;
 
     themes: string | null;
-
-    cover_url: string | null;
 }
