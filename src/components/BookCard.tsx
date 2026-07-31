@@ -11,7 +11,7 @@ function BookCard({reading}: BookCardProps) {
     return (
         <div className="book-card">
             <img
-                src={book.cover_url ?? ""}
+                src={reading.cover_url ?? ""}
                 alt={book.title}
             />
             <div>

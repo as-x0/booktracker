@@ -16,6 +16,8 @@ export interface CreateReadingData {
     review?: string | null;
     characters?: string | null;
     dnfReason?: string | null;
+
+    coverUrl: string | null;
 }
 
 export async function createReading(data: CreateReadingData) {
@@ -32,7 +34,8 @@ export async function createReading(data: CreateReadingData) {
             rating: data.rating ?? null,
             review: data.review ?? null,
             characters: data.characters ?? null,
-            dnf_reason: data.dnfReason ?? null
+            dnf_reason: data.dnfReason ?? null,
+            cover_url: data.coverUrl ?? null
         })
         .select("id")
         .single();

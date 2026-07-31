@@ -36,16 +36,21 @@ export async function saveReading(data: ReadingFormData) {
 
     const readingId = await createReading({
         bookId,
+
         statusId:data.statusId,
         readingLanguageId:data.readingLanguageId,
+
         pagesTot:data.pagesTotal,
         pagesRead:data.pagesRead,
+
         startDate:data.startDate,
         finishDate:data.finishDate || null,
+
         rating:data.rating ?? null,
         review:data.review || null,
         characters:data.characters || null,
-        dnfReason:data.dnfReason || null
+        dnfReason:data.dnfReason || null,
+        coverUrl: data.coverUrl,
     });
 
     return readingId;

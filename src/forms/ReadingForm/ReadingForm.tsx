@@ -39,6 +39,8 @@ export interface ReadingFormData {
     review: string;
     characters: string;
     dnfReason: string;
+
+    coverUrl: string;
 }
 
 export default function ReadingForm() {
