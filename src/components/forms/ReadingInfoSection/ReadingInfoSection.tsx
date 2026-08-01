@@ -49,7 +49,7 @@ export default function ReadingInfoSection({
                    Reading Information
             </h3>
 
-            <div className="book-info-grid">
+            <div className="reading-info-grid">
                 <TextInput
                     label="Cover URL"
                     {...register("coverUrl")}
