@@ -4,6 +4,8 @@ import {useForm, type UseFormRegister, type UseFormSetValue, type UseFormWatch} 
 import Button from "../../components/common/Button";
 import BookInfoSection from "../../components/forms/BookInfoSection/BookInfoSection";
 
+import { saveWishlist } from "../../services/saveWishlist";
+
 import type { BookFormData } from "../../types/BookFormData.ts";
 
 import "./WishlistForm.css";
@@ -40,16 +42,23 @@ export default function WishlistForm() {
         );
 
         try {
+            const wishlistId =
+                await saveWishlist(data);
+            console.log(
+                "Wishlist created:",
+                wishlistId
+            );
             setMessage({
-                type: "success",
-                text: "Book added to wishlist"
+                type:"success",
+                text:"Book added to wishlist"
             });
             reset();
-        } catch(error) {
+        }
+        catch(error){
             console.error(error);
             setMessage({
-                type: "error",
-                text: "Error while saving book"
+                type:"error",
+                text:"Error while saving book"
             });
         }
     }
