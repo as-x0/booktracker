@@ -9,6 +9,7 @@ import { saveWishlist } from "../../services/saveWishlist";
 import type { BookFormData } from "../../types/BookFormData.ts";
 
 import "./WishlistForm.css";
+import WishlistInfoSection from "../../components/forms/WishlistInfoSection/WishlistInfoSection.tsx";
 
 export interface WishlistFormData extends BookFormData{
     availabilityId: string;
@@ -83,6 +84,12 @@ export default function WishlistForm() {
                     </p>
                 )
             }
+
+            <WishlistInfoSection
+                register={register}
+                watch={watch}
+                setValue={setValue}
+            />
 
             <Button type="submit">
                 Save
