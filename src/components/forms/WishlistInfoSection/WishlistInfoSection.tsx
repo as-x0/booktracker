@@ -13,7 +13,6 @@ import useAvailability from "../../../hooks/useAvailability";
 
 import "./WishlistInfoSection.css";
 
-
 interface WishlistInfoSectionProps {
     register: UseFormRegister<WishlistFormData>;
     watch: UseFormWatch<WishlistFormData>;
