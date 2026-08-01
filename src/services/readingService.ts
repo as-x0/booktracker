@@ -58,7 +58,8 @@ export async function getReadings(): Promise<ReadingWithDetails[]>{
                 genre:genres(*)
             ),
             status:reading_status(*)
-        `);
+        `)
+    .order("start_date", { ascending: true });
 
     if(error){
         throw error;
