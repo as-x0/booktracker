@@ -1,31 +1,25 @@
 import { useEffect, useState } from "react";
 
+import WishlistForm from "../forms/WishlistForm/WishlistForm";
 import WishlistTable from "../components/WishlistTable";
-import WishlistForm from "../forms/WishlistForm/WishlistForm.tsx";
-
-import type { WishlistWithDetails } from "../types/WishlistWithDetails";
+import Button from "../components/common/Button";
 
 import { getWishlist } from "../services/wishlistService";
 
-import Button from "../components/common/Button";
+import type { WishlistWithDetails } from "../types/WishlistWithDetails";
 
 function TBR() {
-    const [wishlist, setWishlist] = useState<WishlistWithDetails[]>([]);
     const [showForm, setShowForm] = useState(false);
+    const [wishlist, setWishlist] = useState<WishlistWithDetails[]>([]);
+
+    async function loadWishlist() {
+        const data = await getWishlist();
+        setWishlist(data);
+    }
 
     useEffect(() => {
-        async function loadWishlist() {
-            try {
-                const data = await getWishlist();
-                setWishlist(data);
-            } catch(error) {
-                console.error(
-                    "Error loading wishlist:",
-                    error
-                );
-            }
-        }
-        loadWishlist();
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        void loadWishlist();
     }, []);
 
     return (
@@ -44,7 +38,12 @@ function TBR() {
 
             {
                 showForm && (
-                    <WishlistForm />
+                    <WishlistForm
+                        onSaved={() => {
+                            void loadWishlist();
+                            setShowForm(false);
+                        }}
+                    />
                 )
             }
 

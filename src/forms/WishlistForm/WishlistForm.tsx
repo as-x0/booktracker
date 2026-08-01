@@ -1,23 +1,35 @@
 import { useState } from "react";
-import {useForm, type UseFormRegister, type UseFormSetValue, type UseFormWatch} from "react-hook-form";
+
+import {
+    useForm,
+    type UseFormRegister,
+    type UseFormSetValue,
+    type UseFormWatch
+} from "react-hook-form";
 
 import Button from "../../components/common/Button";
 import BookInfoSection from "../../components/forms/BookInfoSection/BookInfoSection";
+import WishlistInfoSection from "../../components/forms/WishlistInfoSection/WishlistInfoSection";
 
 import { saveWishlist } from "../../services/saveWishlist";
 
-import type { BookFormData } from "../../types/BookFormData.ts";
+import type { BookFormData } from "../../types/BookFormData";
 
 import "./WishlistForm.css";
-import WishlistInfoSection from "../../components/forms/WishlistInfoSection/WishlistInfoSection.tsx";
 
-export interface WishlistFormData extends BookFormData{
+export interface WishlistFormData extends BookFormData {
     availabilityId: string;
     recommendedBy: string;
     notes: string;
 }
 
-export default function WishlistForm() {
+interface WishlistFormProps {
+    onSaved: () => void;
+}
+
+export default function WishlistForm({
+                                         onSaved
+                                     }: WishlistFormProps) {
     const {
         register,
         handleSubmit,
@@ -25,23 +37,21 @@ export default function WishlistForm() {
         watch,
         reset
     } = useForm<WishlistFormData>({
-        shouldUnregister: false
+        shouldUnregister:false
     });
 
     const [message, setMessage] = useState<{
-        type: "success" | "error";
-        text: string;
+        type:"success" | "error";
+        text:string;
     } | null>(null);
 
     async function onSubmit(
         data: WishlistFormData
     ) {
-
         console.log(
             "WISHLIST DATA:",
             data
         );
-
         try {
             const wishlistId =
                 await saveWishlist(data);
@@ -49,13 +59,10 @@ export default function WishlistForm() {
                 "Wishlist created:",
                 wishlistId
             );
-            setMessage({
-                type:"success",
-                text:"Book added to wishlist"
-            });
             reset();
+            onSaved();
         }
-        catch(error){
+        catch(error) {
             console.error(error);
             setMessage({
                 type:"error",
@@ -67,23 +74,18 @@ export default function WishlistForm() {
     return (
         <form
             className="wishlist-form"
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={
+                handleSubmit(onSubmit)
+            }
         >
+
             <h2>New Book</h2>
 
             <BookInfoSection
-                register={register as unknown as UseFormRegister<BookFormData>}
-                watch={watch as unknown as UseFormWatch<BookFormData>}
-                setValue={setValue as unknown as UseFormSetValue<BookFormData>}
+                register={ register as unknown as UseFormRegister<BookFormData> }
+                watch={ watch as unknown as UseFormWatch<BookFormData> }
+                setValue={ setValue as unknown as UseFormSetValue<BookFormData> }
             />
-
-            {
-                message && (
-                    <p className={`form-message ${message.type}`}>
-                        {message.text}
-                    </p>
-                )
-            }
 
             <WishlistInfoSection
                 register={register}
@@ -91,10 +93,19 @@ export default function WishlistForm() {
                 setValue={setValue}
             />
 
+            {
+                message && (
+                    <p
+                        className={`form-message ${message.type}`}
+                    >
+                        {message.text}
+                    </p>
+                )
+            }
+
             <Button type="submit">
                 Save
             </Button>
-
         </form>
     );
 }
