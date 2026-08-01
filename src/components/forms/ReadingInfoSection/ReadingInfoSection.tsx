@@ -22,8 +22,8 @@ import type { ReadingFormData } from "../../../forms/ReadingForm/ReadingForm";
 
 interface ReadingInfoSectionProps {
     register: UseFormRegister<ReadingFormData>;
-    setValue: UseFormSetValue<ReadingFormData>;
     watch: UseFormWatch<ReadingFormData>;
+    setValue: UseFormSetValue<ReadingFormData>;
 }
 
 export default function ReadingInfoSection({
@@ -50,6 +50,11 @@ export default function ReadingInfoSection({
             </h3>
 
             <div className="book-info-grid">
+                <TextInput
+                    label="Cover URL"
+                    {...register("coverUrl")}
+                />
+
                 <SelectInput
                     label="Status"
                     options={statuses}

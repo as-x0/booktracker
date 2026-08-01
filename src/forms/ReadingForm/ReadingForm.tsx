@@ -1,31 +1,22 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import {
+    useForm,
+    type UseFormRegister,
+    type UseFormWatch,
+    type UseFormSetValue
+} from "react-hook-form";
 
 import Button from "../../components/common/Button";
 import BookInfoSection from "../../components/forms/BookInfoSection/BookInfoSection";
 import ReadingInfoSection from "../../components/forms/ReadingInfoSection/ReadingInfoSection";
 
+import type { BookFormData } from "../../types/BookFormData.ts";
+
 import {saveReading} from "../../services/saveReading.ts";
 
 import "./ReadingForm.css";
 
-export interface ReadingFormData {
-    //BOOK
-    title: string;
-
-    authorName: string;
-    birthCountryName: string;
-
-    genreId: string;
-    themes: string;
-
-    publicationYear: number;
-    originalLanguageId: string;
-
-    seriesName: string;
-    seriesNumber: number;
-
-    //READING
+export interface ReadingFormData extends BookFormData {
     statusId: string;
     readingLanguageId: string;
 
@@ -95,9 +86,9 @@ export default function ReadingForm() {
         <h2>New Reading</h2>
 
         <BookInfoSection
-            register={register}
-            watch={watch}
-            setValue={setValue}
+            register={register as unknown as UseFormRegister<BookFormData>}
+            watch={watch as unknown as UseFormWatch<BookFormData>}
+            setValue={setValue as unknown as UseFormSetValue<BookFormData>}
         />
 
         <ReadingInfoSection

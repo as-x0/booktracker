@@ -10,26 +10,27 @@ import "./BookInfoSection.css"
 
 import type {
     UseFormRegister,
-    UseFormSetValue, UseFormWatch
+    UseFormSetValue,
+    UseFormWatch,
 } from "react-hook-form";
 
 import TextInput from "../../common/TextInput.tsx";
 import SelectInput from "../../common/SelectInput.tsx";
 import AutocompleteInput from "../../common/AutocompleteInput.tsx";
 
-import type { ReadingFormData } from "../../../forms/ReadingForm/ReadingForm";
+import type { BookFormData } from "../../../types/BookFormData.ts";
 
-interface BookInfoSectionProps {
-    register: UseFormRegister<ReadingFormData>;
-    watch: UseFormWatch<ReadingFormData>;
-    setValue: UseFormSetValue<ReadingFormData>;
+interface BookInfoSectionProps{
+    register: UseFormRegister<BookFormData>;
+    watch: UseFormWatch<BookFormData>;
+    setValue: UseFormSetValue<BookFormData>;
 }
 
 export default function BookInfoSection({
-    register,
-    watch,
-    setValue
-}: BookInfoSectionProps) {
+      register,
+      watch,
+      setValue
+  }: BookInfoSectionProps) {
     const genres = useGenres();
 
     const [languageQuery, setLanguageQuery] = useState("");
@@ -42,7 +43,7 @@ export default function BookInfoSection({
     const countries = useCountries(countryQuery);
 
     const [serieQuery, setSerieQuery] = useState("");
-    const series = useSeries(serieQuery)
+    const series = useSeries(serieQuery);
 
     return (
         <section className="book-info-section">
@@ -143,11 +144,6 @@ export default function BookInfoSection({
                     label="Series number"
                     type="number"
                     {...register("seriesNumber", {valueAsNumber:true})}
-                />
-
-                <TextInput
-                    label="Cover URL"
-                    {...register("coverUrl")}
                 />
             </div>
 
