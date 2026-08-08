@@ -5,6 +5,7 @@ import { findOrCreateBook } from "./bookService";
 import { createReading } from "./readingService";
 import { findOrCreateCountry } from "./countryService.ts";
 import { findOrCreateSeries} from "./seriesService.ts";
+import {findOrCreateLanguage} from "./languageService.ts";
 
 export async function saveReading(data: ReadingFormData) {
     const countryId = await findOrCreateCountry(
@@ -23,6 +24,9 @@ export async function saveReading(data: ReadingFormData) {
     const seriesId = await findOrCreateSeries(
         data.seriesName,
     );
+    const originalLanguageId = await findOrCreateLanguage(
+        data.originalLanguageName
+    );
 
     const bookId = await findOrCreateBook({
         title: data.title,
@@ -30,7 +34,7 @@ export async function saveReading(data: ReadingFormData) {
         genreId: data.genreId,
         themes: data.themes,
         publicationYear: data.publicationYear,
-        originalLanguageId: data.originalLanguageId,
+        originalLanguageId,
         seriesId,
         seriesNumber: data.seriesNumber || undefined,
     });

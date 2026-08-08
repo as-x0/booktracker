@@ -10,7 +10,7 @@ export interface BookFormData {
 
     publicationYear: number;
 
-    originalLanguageId: string;
+    originalLanguageName: string;
 
     seriesName: string;
     seriesNumber: number;

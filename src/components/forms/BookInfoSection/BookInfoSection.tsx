@@ -107,9 +107,12 @@ export default function BookInfoSection({
                 <AutocompleteInput
                     label="Original language"
                     options={languages}
-                    onQueryChange={(query)=>{setLanguageQuery(query);}}
-                    onSelect={(language)=>{
-                        setValue("originalLanguageId", language.id);
+                    onQueryChange={(value) => {
+                        setLanguageQuery(value);
+                        setValue("originalLanguageName", value);
+                    }}
+                    onSelect={(language) => {
+                        setValue("originalLanguageName", language.name);
                     }}
                 />
 
