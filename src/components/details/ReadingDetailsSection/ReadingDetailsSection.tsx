@@ -1,6 +1,8 @@
 import type { ReadingWithDetails } from "../../../types/ReadingWithDetails";
 import Button from "../../../components/common/Button";
 
+import "./ReadingDetailsSection.css"
+
 interface ReadingDetailsSectionProps {
     reading: ReadingWithDetails;
     onEdit: () => void;
@@ -17,7 +19,7 @@ export default function ReadingDetailsSection({
     return (
         <section className="reading-details-section">
 
-            <div className="details-section-header">
+            <div className="reading-details-section-header">
                 <h2>Reading Information</h2>
 
                 <Button
@@ -28,66 +30,82 @@ export default function ReadingDetailsSection({
                 </Button>
             </div>
 
-            {reading.cover_url ? (
-                <img
-                    src={reading.cover_url}
-                    alt={`Cover of ${reading.book.title}`}
-                    className="reading-cover"
-                />
-            ) : (
-                <div className="reading-cover-placeholder">
-                    No cover
-                </div>
-            )}
+            <div className="reading-details-grid">
 
-            <p>
-                <strong>Status:</strong>{" "}
-                {reading.status.name}
-            </p>
+                {reading.status?.name && (
+                    <p className="reading-detail">
+                        <strong>Status:</strong>{" "}
+                        {reading.status.name}
+                    </p>
+                )}
 
-            <p>
-                <strong>Reading language:</strong>{" "}
-                {reading.reading_language?.name ?? "—"}
-            </p>
+                {reading.reading_language?.name && (
+                    <p className="reading-detail">
+                        <strong>Reading language:</strong>{" "}
+                        {reading.reading_language.name}
+                    </p>
+                )}
 
-            <p>
-                <strong>Start date:</strong>{" "}
-                {reading.start_date ?? "—"}
-            </p>
+                {reading.start_date && (
+                    <p className="reading-detail">
+                        <strong>Start date:</strong>{" "}
+                        {reading.start_date}
+                    </p>
+                )}
 
-            <p>
-                <strong>Finish date:</strong>{" "}
-                {reading.finish_date ?? "—"}
-            </p>
+                {reading.finish_date && (
+                    <p className="reading-detail">
+                        <strong>Finish date:</strong>{" "}
+                        {reading.finish_date}
+                    </p>
+                )}
 
-            <p>
-                <strong>Pages:</strong>{" "}
-                {reading.pages_read ?? "—"} /{" "}
-                {reading.pages_tot ?? "—"}
-            </p>
+                {reading.pages_tot !== null &&
+                    reading.pages_tot !== undefined && (
+                        <p className="reading-detail">
+                            <strong>Total pages:</strong>{" "}
+                            {reading.pages_tot}
+                        </p>
+                    )}
 
-            <p>
-                <strong>Rating:</strong>{" "}
-                {reading.rating ?? "—"}
-            </p>
+                {reading.pages_read !== null &&
+                    reading.pages_read !== undefined && (
+                        <p className="reading-detail">
+                            <strong>Pages read:</strong>{" "}
+                            {reading.pages_read}
+                        </p>
+                    )}
 
-            <p>
-                <strong>Review:</strong>{" "}
-                {reading.review || "—"}
-            </p>
+                {reading.rating !== null &&
+                    reading.rating !== undefined && (
+                        <p className="reading-detail">
+                            <strong>Rating:</strong>{" "}
+                            {reading.rating}
+                        </p>
+                    )}
 
-            <p>
-                <strong>Characters:</strong>{" "}
-                {reading.characters || "—"}
-            </p>
+                {reading.review && (
+                    <p className="reading-detail reading-detail-full">
+                        <strong>Review:</strong>{" "}
+                        {reading.review}
+                    </p>
+                )}
 
-            {isDnf && (
-                <p>
-                    <strong>DNF reason:</strong>{" "}
-                    {reading.dnf_reason || "—"}
-                </p>
-            )}
+                {reading.characters && (
+                    <p className="reading-detail reading-detail-full">
+                        <strong>Characters:</strong>{" "}
+                        {reading.characters}
+                    </p>
+                )}
 
+                {isDnf && reading.dnf_reason && (
+                    <p className="reading-detail reading-detail-full">
+                        <strong>DNF reason:</strong>{" "}
+                        {reading.dnf_reason}
+                    </p>
+                )}
+
+            </div>
         </section>
     );
 }

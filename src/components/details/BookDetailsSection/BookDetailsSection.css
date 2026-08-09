@@ -1,0 +1,39 @@
+.book-details-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.book-details-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.book-details-section-header h2 {
+    margin: 0;
+}
+
+.book-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem 2rem;
+}
+
+.book-detail {
+    margin: 0;
+}
+
+.book-detail strong {
+    margin-right: 0.4rem;
+}
+
+@media (max-width: 600px) {
+    .book-details-grid {
+        grid-template-columns: 1fr;
+    }
+}

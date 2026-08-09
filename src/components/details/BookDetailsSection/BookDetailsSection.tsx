@@ -1,6 +1,8 @@
 import type { BookWithDetails } from "../../../types/BookWithDetails";
 import Button from "../../../components/common/Button";
 
+import "./BookDetailsSection.css"
+
 interface BookDetailsSectionProps {
     book: BookWithDetails;
     onEdit: () => void;
@@ -11,8 +13,8 @@ export default function BookDetailsSection({
                                                onEdit
                                            }: BookDetailsSectionProps) {
     return (
-        <section>
-            <div>
+        <section className="book-details-section">
+            <div className="book-details-section-header">
                 <h2>Book Information</h2>
 
                 <Button
@@ -23,50 +25,50 @@ export default function BookDetailsSection({
                 </Button>
             </div>
 
-            <p>
-                <strong>Title:</strong>{" "}
-                {book.title}
-            </p>
+            <div className="book-details-grid">
+                {book.genre?.name && (
+                    <p className="book-detail">
+                        <strong>Genre:</strong>{" "}
+                        {book.genre.name}
+                    </p>
+                )}
 
-            <p>
-                <strong>Author:</strong>{" "}
-                {book.author.name}
-            </p>
+                {book.themes && (
+                    <p className="book-detail">
+                        <strong>Themes:</strong>{" "}
+                        {book.themes}
+                    </p>
+                )}
 
-            <p>
-                <strong>Birth country:</strong>{" "}
-                {book.author.birth_country?.name ?? "—"}
-            </p>
+                {book.publication_year && (
+                    <p className="book-detail">
+                        <strong>Publication year:</strong>{" "}
+                        {book.publication_year}
+                    </p>
+                )}
 
-            <p>
-                <strong>Genre:</strong>{" "}
-                {book.genre.name}
-            </p>
+                {book.original_language?.name && (
+                    <p className="book-detail">
+                        <strong>Original language:</strong>{" "}
+                        {book.original_language.name}
+                    </p>
+                )}
 
-            <p>
-                <strong>Themes:</strong>{" "}
-                {book.themes || "—"}
-            </p>
+                {book.series?.name && (
+                    <p className="book-detail">
+                        <strong>Series:</strong>{" "}
+                        {book.series.name}
+                    </p>
+                )}
 
-            <p>
-                <strong>Publication year:</strong>{" "}
-                {book.publication_year ?? "—"}
-            </p>
-
-            <p>
-                <strong>Original language:</strong>{" "}
-                {book.original_language?.name ?? "—"}
-            </p>
-
-            <p>
-                <strong>Series:</strong>{" "}
-                {book.series?.name ?? "—"}
-            </p>
-
-            <p>
-                <strong>Series number:</strong>{" "}
-                {book.series_number ?? "—"}
-            </p>
+                {book.series_number !== null &&
+                    book.series_number !== undefined && (
+                        <p className="book-detail">
+                            <strong>Series number:</strong>{" "}
+                            {book.series_number}
+                        </p>
+                    )}
+            </div>
         </section>
     );
 }
