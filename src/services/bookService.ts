@@ -100,7 +100,10 @@ export async function getBookById(
         .from("books")
         .select(`
             *,
-            author:authors(*),
+            author:authors(
+                *,
+                birth_country:countries(*)
+            ),
             genre:genres(*),
             original_language:languages(*),
             series:series(*)
