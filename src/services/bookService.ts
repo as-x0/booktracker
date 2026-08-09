@@ -1,6 +1,17 @@
 import { supabase } from "../supabase/client";
 import type { Book } from "../types/Book";
 
+export interface UpdateBookData {
+    title?: string;
+    authorId?: string;
+    genreId?: string | null;
+    publicationYear?: number | null;
+    originalLanguageId?: string | null;
+    seriesId?: string | null;
+    seriesNumber?: number | null;
+    themes?: string | null;
+}
+
 export async function getBooks(): Promise<Book[]> {
     const { data, error } = await supabase
         .from("books")
@@ -78,4 +89,53 @@ export async function findOrCreateBook(
     }
 
     return newBook.id;
+}
+
+export async function updateBook(
+    id: string,
+    data: UpdateBookData
+): Promise<void> {
+
+    const updates: Record<string, unknown> = {};
+
+    if (data.title !== undefined) {
+        updates.title = data.title;
+    }
+
+    if (data.authorId !== undefined) {
+        updates.author_id = data.authorId;
+    }
+
+    if (data.genreId !== undefined) {
+        updates.genre_id = data.genreId;
+    }
+
+    if (data.publicationYear !== undefined) {
+        updates.publication_year = data.publicationYear;
+    }
+
+    if (data.originalLanguageId !== undefined) {
+        updates.original_language_id = data.originalLanguageId;
+    }
+
+    if (data.seriesId !== undefined) {
+        updates.series_id = data.seriesId;
+    }
+
+    if (data.seriesNumber !== undefined) {
+        updates.series_number = data.seriesNumber;
+    }
+
+    if (data.themes !== undefined) {
+        updates.themes = data.themes;
+    }
+
+    const { error } = await supabase
+        .from("books")
+        .update(updates)
+        .eq("id", id);
+
+    if (error) {
+        throw error;
+    }
 }
