@@ -1,5 +1,6 @@
 import { supabase } from "../supabase/client";
-import type { Book } from "../types/Book";
+import type { Book } from "../types/Book.ts"
+import type { BookWithDetails } from "../types/BookWithDetails.ts";
 
 export interface UpdateBookData {
     title?: string;
@@ -89,6 +90,29 @@ export async function findOrCreateBook(
     }
 
     return newBook.id;
+}
+
+export async function getBookById(
+    id: string
+): Promise<BookWithDetails | null> {
+
+    const { data, error } = await supabase
+        .from("books")
+        .select(`
+            *,
+            author:authors(*),
+            genre:genres(*),
+            original_language:languages(*),
+            series:series(*)
+        `)
+        .eq("id", id)
+        .maybeSingle();
+
+    if (error) {
+        throw error;
+    }
+
+    return data as BookWithDetails | null;
 }
 
 export async function updateBook(

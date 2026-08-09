@@ -96,9 +96,12 @@ export async function getReadingById(id: string): Promise<ReadingWithDetails>{
             book:books(
                 *,
                 author:authors(*),
-                genre:genres(*)
+                genre:genres(*),
+                original_language:languages(*),
+                series:series(*)
             ),
-            status:reading_status(*)
+            status:reading_status(*),
+            reading_language:languages(*)
         `)
         .eq("id", id)
         .single();
