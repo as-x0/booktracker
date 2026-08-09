@@ -8,6 +8,8 @@ import BookDetailsSection from "../components/details/BookDetailsSection/BookDet
 import ReadingDetailsSection from "../components/details/ReadingDetailsSection/ReadingDetailsSection";
 import Button from "../components/common/Button.tsx";
 
+import "./ReadingDetails.css"
+
 function ReadingDetails() {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
@@ -54,7 +56,19 @@ function ReadingDetails() {
                 ← Back
             </Button>
 
-            <h1>{reading.book.title}</h1>
+            <div className="reading-details-header">
+                {reading.cover_url && (
+                    <img
+                        src={reading.cover_url}
+                        alt={`Cover of ${reading.book.title}`}
+                        className="reading-details-cover"
+                    />
+                )}
+
+                <h1>
+                    {reading.book.title} - {reading.book.author.name}
+                </h1>
+            </div>
 
             <BookDetailsSection
                 book={reading.book}

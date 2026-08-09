@@ -1,0 +1,45 @@
+.reading-details {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+@media (max-width: 600px) {
+    .reading-details-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .reading-details-cover {
+        width: 110px;
+        height: 165px;
+    }
+}
+
+/* Back */
+.reading-details > button {
+    align-self: flex-start;
+}
+
+/* Header */
+.reading-details-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.reading-details-header h1 {
+    margin: 0;
+}
+
+/* Cover */
+.reading-details-cover {
+    width: 140px;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 6px;
+}
