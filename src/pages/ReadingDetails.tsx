@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getReadingById } from "../services/readingService";
 import type { ReadingWithDetails } from "../types/ReadingWithDetails";
 
+import BookDetailsSection from "../components/details/BookDetailsSection/BookDetailsSection";
+import ReadingDetailsSection from "../components/details/ReadingDetailsSection/ReadingDetailsSection";
 import Button from "../components/common/Button.tsx";
 
 function ReadingDetails() {
@@ -43,7 +45,8 @@ function ReadingDetails() {
     }
 
     return (
-        <div>
+        <div className="reading-details">
+
             <Button
                 type="button"
                 onClick={() => navigate("/books")}
@@ -53,82 +56,20 @@ function ReadingDetails() {
 
             <h1>{reading.book.title}</h1>
 
-            <section>
-                <h2>Book Information</h2>
+            <BookDetailsSection
+                book={reading.book}
+                onEdit={() => {
+                    console.log("Edit book");
+                }}
+            />
 
-                <p>
-                    <strong>Author:</strong>{" "}
-                    {reading.book.author.name}
-                </p>
+            <ReadingDetailsSection
+                reading={reading}
+                onEdit={() => {
+                    console.log("Edit reading");
+                }}
+            />
 
-                <p>
-                    <strong>Status:</strong>{" "}
-                    {reading.status.name}
-                </p>
-
-                <Button
-                    type="button"
-                    onClick={() => {
-                        console.log("Edit book");
-                    }}
-                >
-                    Edit
-                </Button>
-            </section>
-
-            <section>
-                <h2>Reading Information</h2>
-
-                <p>
-                    <strong>Start date:</strong>{" "}
-                    {reading.start_date || "—"}
-                </p>
-
-                <p>
-                    <strong>Finish date:</strong>{" "}
-                    {reading.finish_date || "—"}
-                </p>
-
-                <p>
-                    <strong>Pages:</strong>{" "}
-                    {reading.pages_read ?? "—"} /{" "}
-                    {reading.pages_tot ?? "—"}
-                </p>
-
-                <p>
-                    <strong>Rating:</strong>{" "}
-                    {reading.rating ?? "—"}
-                </p>
-
-                <p>
-                    <strong>Review:</strong>{" "}
-                    {reading.review || "—"}
-                </p>
-
-                <p>
-                    <strong>Characters:</strong>{" "}
-                    {reading.characters || "—"}
-                </p>
-
-                <p>
-                    <strong>DNF reason:</strong>{" "}
-                    {reading.dnf_reason || "—"}
-                </p>
-
-                <p>
-                    <strong>Cover URL:</strong>{" "}
-                    {reading.cover_url || "—"}
-                </p>
-
-                <Button
-                    type="button"
-                    onClick={() => {
-                        console.log("Edit reading");
-                    }}
-                >
-                    Edit
-                </Button>
-            </section>
         </div>
     );
 }

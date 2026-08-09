@@ -1,4 +1,5 @@
 import type { BookWithDetails } from "../../../types/BookWithDetails";
+import Button from "../../../components/common/Button";
 
 interface BookDetailsSectionProps {
     book: BookWithDetails;
@@ -14,12 +15,12 @@ export default function BookDetailsSection({
             <div>
                 <h2>Book Information</h2>
 
-                <button
+                <Button
                     type="button"
                     onClick={onEdit}
                 >
                     Edit
-                </button>
+                </Button>
             </div>
 
             <p>
