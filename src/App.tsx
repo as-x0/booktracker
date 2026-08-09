@@ -8,6 +8,7 @@ import TBR from "./pages/TBR"
 import DNF from "./pages/DNF"
 import Goals from "./pages/Goals"
 import Statistics from "./pages/Statistics"
+import ReadingDetails from "./pages/ReadingDetails";
 
 function App() {
     return (
@@ -20,6 +21,11 @@ function App() {
                     <Route path="/dnf" element={<DNF />} />
                     <Route path="/goals" element={<Goals />} />
                     <Route path="/statistics" element={<Statistics />} />
+
+                    <Route
+                        path="/readings/:id"
+                        element={<ReadingDetails />}
+                    />
                 </Route>
             </Routes>
         </BrowserRouter>
