@@ -23,7 +23,7 @@ export async function searchAuthors(
     return data ?? [];
 }
 
-export async function findOrCreateAuthor(name: string, birthCountryId: string): Promise<string> {
+export async function findOrCreateAuthor(name: string, birthCountryId: string | null): Promise<string> {
     const { data: existingAuthor, error: searchError } = await supabase
         .from("authors")
         .select("id")

@@ -76,9 +76,7 @@ function ReadingDetails() {
 
             <BookDetailsSection
                 book={reading.book}
-                onEdit={() => {
-                    console.log("Edit book");
-                }}
+                onSaved={loadReading}
             />
 
             <ReadingDetailsSection

@@ -11,6 +11,7 @@ interface TextInputProps {
     required?: boolean;
     type?:string;
     name?: string;
+    value?: string | number;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     onBlur?: FocusEventHandler<HTMLInputElement>;
 }
@@ -22,6 +23,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         required = false,
         type = "text",
         name,
+        value,
         onChange,
         onBlur
 }, ref){
@@ -33,6 +35,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
                     ref={ref}
                     name={name}
                     type={type}
+                    value={value}
                     placeholder={placeholder}
                     required={required}
                     onChange={onChange}

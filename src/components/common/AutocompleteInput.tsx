@@ -9,18 +9,19 @@ export interface Option {
 interface AutocompleteInputProps {
     label: string;
     options: Option[];
+    value?: string;
     onSelect: (option: Option) => void;
     onQueryChange?: (query: string) => void;
 }
 
 export default function AutocompleteInput({
-                                              label,
-                                              options,
-                                              onSelect,
-                                              onQueryChange
-                                          }: AutocompleteInputProps) {
+    label,
+    options,
+    value,
+    onSelect,
+    onQueryChange
+}: AutocompleteInputProps) {
 
-    const [query, setQuery] = useState("");
     const [showOptions, setShowOptions] = useState(false);
 
     return (
@@ -29,15 +30,15 @@ export default function AutocompleteInput({
 
             <input
                 type="text"
-                value={query}
-                onChange={(event)=>{
-                    const value = event.target.value;
-                    setQuery(value);
-                    onQueryChange?.(value);
+                value={value ?? ""}
+                onChange={(event) => {
+                    const newValue = event.target.value;
+
+                    onQueryChange?.(newValue);
                     setShowOptions(true);
                 }}
 
-                onFocus={()=>
+                onFocus={() =>
                     setShowOptions(true)
                 }
             />
@@ -49,7 +50,6 @@ export default function AutocompleteInput({
                             key={option.id}
                             onClick={()=>{
                                 onSelect(option);
-                                setQuery(option.name);
                                 setShowOptions(false);
                             }}
                         >
