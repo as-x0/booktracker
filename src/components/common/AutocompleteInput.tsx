@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./AutocompleteInput.css";
 
 export interface Option {
@@ -9,7 +9,9 @@ export interface Option {
 interface AutocompleteInputProps {
     label: string;
     options: Option[];
+
     value?: string;
+
     onSelect: (option: Option) => void;
     onQueryChange?: (query: string) => void;
 }
@@ -22,36 +24,57 @@ export default function AutocompleteInput({
     onQueryChange
 }: AutocompleteInputProps) {
 
+    const [query, setQuery] = useState(value ?? "");
     const [showOptions, setShowOptions] = useState(false);
+
+    /*
+     * Se il valore viene modificato dall'esterno
+     * (per esempio quando carichiamo i dati durante l'editing),
+     * aggiorniamo anche il valore visualizzato.
+     */
+    useEffect(() => {
+        if (value !== undefined) {
+            setQuery(value);
+        }
+    }, [value]);
+
+    function handleChange(
+        event: React.ChangeEvent<HTMLInputElement>
+    ) {
+        const newValue = event.target.value;
+
+        setQuery(newValue);
+        onQueryChange?.(newValue);
+        setShowOptions(true);
+    }
+
+    function handleSelect(option: Option) {
+        setQuery(option.name);
+        setShowOptions(false);
+
+        onSelect(option);
+    }
 
     return (
         <div className="autocomplete">
-            <label>{label}</label>
+            <label>
+                {label}
+            </label>
 
             <input
                 type="text"
-                value={value ?? ""}
-                onChange={(event) => {
-                    const newValue = event.target.value;
-
-                    onQueryChange?.(newValue);
-                    setShowOptions(true);
-                }}
-
-                onFocus={() =>
-                    setShowOptions(true)
-                }
+                value={query}
+                onChange={handleChange}
+                onFocus={() => setShowOptions(true)}
             />
 
             {showOptions && options.length > 0 && (
                 <ul className="autocomplete-list">
                     {options.map(option => (
-                        <li className="autocomplete-item"
+                        <li
                             key={option.id}
-                            onClick={()=>{
-                                onSelect(option);
-                                setShowOptions(false);
-                            }}
+                            className="autocomplete-item"
+                            onClick={() => handleSelect(option)}
                         >
                             {option.name}
                         </li>
