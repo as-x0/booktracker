@@ -14,35 +14,39 @@ function ReadingDetails() {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
 
-    const [reading, setReading] =
-        useState<ReadingWithDetails | null>(null);
+    const [reading, setReading] = useState<ReadingWithDetails | null>(null);
 
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        async function loadReading() {
-            if (!id) {
-                return;
-            }
+    async function loadReading() {
+        if(!id) return;
 
-            try {
-                const data = await getReadingById(id);
-                setReading(data);
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setLoading(false);
-            }
+        try {
+            const data = await getReadingById(id);
+            setReading(data);
+        } catch (error) {
+            console.log(error);
         }
-
-        loadReading();
-    }, [id]);
-
-    if (loading) {
-        return <p>Loading...</p>;
     }
 
-    if (!reading) {
+    useEffect(() => {
+        if (!id) {
+            return;
+        }
+        getReadingById(id)
+            .then(data => {
+                setReading(data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error(error);
+                setLoading(false);
+            });
+    }, [id]);
+    if(loading){
+        return <p>Loading...</p>;
+    }
+    if (!reading){
         return <p>Reading not found.</p>;
     }
 
@@ -79,9 +83,7 @@ function ReadingDetails() {
 
             <ReadingDetailsSection
                 reading={reading}
-                onEdit={() => {
-                    console.log("Edit reading");
-                }}
+                onSaved={loadReading}
             />
 
         </div>
