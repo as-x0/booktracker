@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import {getWishlist, getWishlistById} from "../services/wishlistService";
+import { getWishlistById } from "../services/wishlistService";
 import type { WishlistWithDetails } from "../types/WishlistWithDetails";
 
 import BookDetailsSection from "../components/details/BookDetailsSection/BookDetailsSection";
@@ -11,7 +11,7 @@ import Button from "../components/common/Button.tsx";
 import "./WishlistDetails.css"
 
 function WishlistDetails() {
-    const {id} = useParams<{ id: string }>();
+    const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
 
     const [wishlist, setWishlist] = useState<WishlistWithDetails | null>(null);
@@ -60,11 +60,20 @@ function WishlistDetails() {
             </Button>
 
             <div className="wishlist-details-header">
-                <h1>{wishlist.book.title} - {wishlist.book.author.name}</h1>
+                <h1>
+                    {wishlist.book.title} - {wishlist.book.author.name}
+                </h1>
             </div>
 
-            <BookDetailsSection book={wishlist.book} onSaved={loadWishlist}/>
-            <WishlistDetailsSection wishlist={wishlist} onSaved={loadWishlist}/>
+            <BookDetailsSection
+                book={wishlist.book}
+                onSaved={loadWishlist}
+            />
+
+            <WishlistDetailsSection
+                wishlist={wishlist}
+                onSaved={loadWishlist}
+            />
         </div>
     );
 }

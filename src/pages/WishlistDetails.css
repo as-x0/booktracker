@@ -1,4 +1,4 @@
-.reading-details {
+.wishlist-details {
     max-width: 900px;
     margin: 2rem auto;
     padding: 0 1rem;
@@ -26,20 +26,12 @@
 }
 
 /* Header */
-.reading-details-header {
+.wishlist-details-header {
     display: flex;
     align-items: center;
     gap: 2rem;
 }
 
-.reading-details-header h1 {
+.wishlist-details-header h1 {
     margin: 0;
-}
-
-/* Cover */
-.reading-details-cover {
-    width: 140px;
-    height: 210px;
-    object-fit: cover;
-    border-radius: 6px;
 }
