@@ -52,7 +52,6 @@ function ReadingDetails() {
 
     return (
         <div className="reading-details">
-
             <Button
                 type="button"
                 onClick={() => navigate("/books")}
