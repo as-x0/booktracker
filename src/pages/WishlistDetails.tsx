@@ -8,6 +8,8 @@ import BookDetailsSection from "../components/details/BookDetailsSection/BookDet
 import WishlistDetailsSection from "../components/details/WishlistDetailsSection/WishlistDetailsSection";
 import Button from "../components/common/Button.tsx";
 
+import "./WishlistDetails.css"
+
 function WishlistDetails() {
     const {id} = useParams<{ id: string }>();
     const navigate = useNavigate();
@@ -20,7 +22,7 @@ function WishlistDetails() {
         if (!id) return;
 
         try {
-            const data = await getWishlist(id);
+            const data = await getWishlistById(id);
             setWishlist(data);
         } catch (error) {
             console.log(error);
@@ -62,7 +64,7 @@ function WishlistDetails() {
             </div>
 
             <BookDetailsSection book={wishlist.book} onSaved={loadWishlist}/>
-            <WishlistDetailsSection wishlist={wishlist} onEdit={loadWishlist}/>
+            <WishlistDetailsSection wishlist={wishlist} onSaved={loadWishlist}/>
         </div>
     );
 }

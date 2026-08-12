@@ -7,8 +7,8 @@ interface WishlistTableProps {
 }
 
 function WishlistTable({
-                           wishlist
-                       }: WishlistTableProps) {
+    wishlist
+}: WishlistTableProps) {
     const navigate = useNavigate();
 
     return (
@@ -27,9 +27,7 @@ function WishlistTable({
                 {wishlist.map((item) => (
                     <tr
                         key={item.id}
-                        onClick={() =>
-                            navigate(`/wishlist/${item.id}`)
-                        }
+                        onClick={() => navigate(`/tbr/${item.id}`)}
                         className="wishlist-table-row"
                     >
                         <td>{item.book.title}</td>

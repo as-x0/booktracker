@@ -1,34 +1,33 @@
 import type { WishlistWithDetails } from "../../../types/WishlistWithDetails";
+
 import Button from "../../../components/common/Button";
 
 import "./WishlistDetailsSection.css";
 
 interface WishlistDetailsSectionProps {
     wishlist: WishlistWithDetails;
-    onEdit: () => void;
+    onSaved: () => void;
 }
 
 export default function WishlistDetailsSection({
-                                                   wishlist,
-                                                   onEdit
-                                               }: WishlistDetailsSectionProps) {
+    wishlist,
+    onSaved
+}: WishlistDetailsSectionProps) {
 
     return (
         <section className="wishlist-details-section">
-
             <div className="wishlist-details-section-header">
                 <h2>Wishlist Information</h2>
 
                 <Button
                     type="button"
-                    onClick={onEdit}
+                    onClick={onSaved}
                 >
                     Edit
                 </Button>
             </div>
 
             <div className="wishlist-details-grid">
-
                 {wishlist.availability?.name && (
                     <p className="wishlist-detail">
                         <strong>Availability:</strong>{" "}
