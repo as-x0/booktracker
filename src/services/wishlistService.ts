@@ -8,6 +8,12 @@ export interface CreateWishlistData {
     notes?: string | null;
 }
 
+export interface UpdateWishlistData {
+    availabilityId?: string | null;
+    recommendedBy?: string | null;
+    notes?: string | null;
+}
+
 export async function createWishlist(
     data: CreateWishlistData
 ) {
@@ -75,4 +81,22 @@ export async function getWishlistById(id: string): Promise<WishlistWithDetails |
     }
 
     return data as WishlistWithDetails | null;
+}
+
+export async function updateWishlist(
+    id: string,
+    data: UpdateWishlistData
+){
+    const { error } = await supabase
+        .from("wishlist")
+        .update({
+            availability_id: data.availabilityId,
+            recommended_by: data.recommendedBy,
+            notes: data.notes,
+        })
+        .eq("id", id)
+
+    if (error) {
+        throw error;
+    }
 }

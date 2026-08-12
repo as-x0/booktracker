@@ -11,6 +11,7 @@ interface TextAreaProps {
     required?: boolean;
     rows?: number;
     name?: string;
+    value?: string;
     onChange?: ChangeEventHandler<HTMLTextAreaElement>;
     onBlur?: FocusEventHandler<HTMLTextAreaElement>;
 }
@@ -22,6 +23,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     required = false,
     rows = 5,
     name,
+    value,
     onChange,
     onBlur
 }, ref) {
@@ -33,6 +35,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                 <textarea
                     ref={ref}
                     name={name}
+                    value={value}
                     placeholder={placeholder}
                     required={required}
                     rows={rows}
