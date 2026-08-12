@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import type { WishlistWithDetails } from "../types/WishlistWithDetails";
 import "./WishlistTable.css";
 
@@ -8,6 +9,7 @@ interface WishlistTableProps {
 function WishlistTable({
                            wishlist
                        }: WishlistTableProps) {
+    const navigate = useNavigate();
 
     return (
         <table className="wishlist-table">
@@ -22,37 +24,21 @@ function WishlistTable({
             </thead>
 
             <tbody>
-            {
-                wishlist.map(
-                    (item) => (
-                        <tr key={item.id}>
-                            <td>{item.book.title}</td>
-                            <td>{item.book.author.name}</td>
-                            <td>
-                                {
-                                    item.book.genre?.name
-                                    ??
-                                    "-"
-                                }
-                            </td>
-                            <td>
-                                {
-                                    item.availability?.name
-                                    ??
-                                    "-"
-                                }
-                            </td>
-                            <td>
-                                {
-                                    item.recommended_by
-                                    ??
-                                    "-"
-                                }
-                            </td>
-                        </tr>
-                    )
-                )
-            }
+                {wishlist.map((item) => (
+                    <tr
+                        key={item.id}
+                        onClick={() =>
+                            navigate(`/wishlist/${item.id}`)
+                        }
+                        className="wishlist-table-row"
+                    >
+                        <td>{item.book.title}</td>
+                        <td>{item.book.author.name}</td>
+                        <td>{item.book.genre?.name ?? "-"}</td>
+                        <td>{item.availability?.name ?? "-"}</td>
+                        <td>{item.recommended_by ?? "-"}</td>
+                    </tr>
+                ))}
             </tbody>
         </table>
     );

@@ -52,3 +52,27 @@ export async function getWishlist(): Promise<WishlistWithDetails[]> {
 
     return data as WishlistWithDetails[];
 }
+
+export async function getWishlistById(id: string): Promise<WishlistWithDetails | null> {
+    const { data, error } = await supabase
+        .from("wishlist")
+        .select(`
+            *,
+            book:books(
+                *,
+                author:authors(*),
+                genre:genres(*),
+                original_language:languages(*),
+                series:series(*)
+            ),
+            availability:availability(*)
+        `)
+        .eq("id", id)
+        .single();
+
+    if (error) {
+        throw error;
+    }
+
+    return data as WishlistWithDetails | null;
+}
