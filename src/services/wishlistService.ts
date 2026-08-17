@@ -12,6 +12,7 @@ export interface UpdateWishlistData {
     availabilityId?: string | null;
     recommendedBy?: string | null;
     notes?: string | null;
+    startedAt?: string | null;
 }
 
 export async function createWishlist(
@@ -23,7 +24,8 @@ export async function createWishlist(
             book_id: data.bookId,
             availability_id: data.availabilityId,
             recommended_by: data.recommendedBy ?? null,
-            notes: data.notes ?? null
+            notes: data.notes ?? null,
+            started_at: null
         })
         .select("id")
         .single();
@@ -86,15 +88,28 @@ export async function getWishlistById(id: string): Promise<WishlistWithDetails |
 export async function updateWishlist(
     id: string,
     data: UpdateWishlistData
-){
+) {
+    const updates: Record<string, unknown> = {};
+    if (data.availabilityId !== undefined) {
+        updates.availability_id = data.availabilityId;
+    }
+
+    if (data.recommendedBy !== undefined) {
+        updates.recommended_by = data.recommendedBy;
+    }
+
+    if (data.notes !== undefined) {
+        updates.notes = data.notes;
+    }
+
+    if (data.startedAt !== undefined) {
+        updates.started_at = data.startedAt;
+    }
+
     const { error } = await supabase
         .from("wishlist")
-        .update({
-            availability_id: data.availabilityId,
-            recommended_by: data.recommendedBy,
-            notes: data.notes,
-        })
-        .eq("id", id)
+        .update(updates)
+        .eq("id", id);
 
     if (error) {
         throw error;

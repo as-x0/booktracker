@@ -4,4 +4,5 @@ export interface Wishlist {
     availability_id: string | null;
     recommended_by: string | null;
     notes: string | null;
+    started_at: string | null;
 }
