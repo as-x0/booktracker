@@ -51,6 +51,11 @@ export default function ReadingInfoSection({
             </h3>
 
             <div className="reading-info-grid">
+
+
+
+
+
                 <TextInput
                     label="Cover URL"
                     {...register("coverUrl")}

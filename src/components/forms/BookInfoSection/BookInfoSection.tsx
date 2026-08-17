@@ -52,104 +52,121 @@ export default function BookInfoSection({
             </h3>
 
             <div className="book-info-grid">
-                <TextInput
-                    label="Title"
-                    {...register("title")}
-                />
+                <div className="book-detail book-detail-full">
+                    <TextInput
+                        label="Title"
+                        {...register("title")}
+                    />
+                </div>
 
-                <AutocompleteInput
-                    label="Author"
-                    options={authors}
-                    onQueryChange={(value)=>{
-                        setAuthorQuery(value);
-                        setValue("authorName", value);
-                    }}
-                    onSelect={(author)=>{
-                        setValue("authorName", author.name);
-                    }}
-                />
+                <div className="book-detail">
+                    <AutocompleteInput
+                        label="Author"
+                        options={authors}
+                        onQueryChange={(value)=>{
+                            setAuthorQuery(value);
+                            setValue("authorName", value);
+                        }}
+                        onSelect={(author)=>{
+                            setValue("authorName", author.name);
+                        }}
+                    />
+                </div>
 
-                <AutocompleteInput
-                    label="Birth country"
-                    options={countries}
-                    onQueryChange={(value)=>{
-                        setCountryQuery(value);
-                        setValue("birthCountryName", value);
-                    }}
-                    onSelect={(country)=>{
-                        setValue(
-                            "birthCountryName",
-                            country.name,
-                        );
-                    }}
-                />
+                <div className="book-detail">
+                    <AutocompleteInput
+                        label="Birth country"
+                        options={countries}
+                        onQueryChange={(value)=>{
+                            setCountryQuery(value);
+                            setValue("birthCountryName", value);
+                        }}
+                        onSelect={(country)=>{
+                            setValue(
+                                "birthCountryName",
+                                country.name,
+                            );
+                        }}
+                    />
+                </div>
 
-                <SelectInput
-                    label="Genre"
-                    options={genres}
-                    value={watch("genreId")}
-                    onChange={(value) =>
-                        setValue("genreId", value)
-                    }
-                />
+                <div className="book-detail">
+                    <SelectInput
+                        label="Genre"
+                        options={genres}
+                        value={watch("genreId")}
+                        onChange={(value) =>
+                            setValue("genreId", value)
+                        }
+                    />
+                </div>
 
-                <TextInput
-                    label="Themes"
-                    {...register("themes")}
-                />
+                <div className="book-detail">
+                    <TextInput
+                        label="Themes"
+                        {...register("themes")}
+                    />
+                </div>
 
-                <TextInput
-                    label="Publication year"
-                    type="number"
-                    {...register("publicationYear", {valueAsNumber:true})}
-                />
+                <div className="book-detail">
+                    <TextInput
+                        label="Publication year"
+                        type="number"
+                        {...register("publicationYear", {valueAsNumber:true})}
+                    />
+                </div>
 
-                <AutocompleteInput
-                    label="Original language"
-                    options={languages}
-                    onQueryChange={(value) => {
-                        setLanguageQuery(value);
-                        setValue("originalLanguageName", value);
-                    }}
-                    onSelect={(language) => {
-                        setValue("originalLanguageName", language.name);
-                    }}
-                />
+                <div className="book-detail">
+                    <AutocompleteInput
+                        label="Original language"
+                        options={languages}
+                        onQueryChange={(value) => {
+                            setLanguageQuery(value);
+                            setValue("originalLanguageName", value);
+                        }}
+                        onSelect={(language) => {
+                            setValue("originalLanguageName", language.name);
+                        }}
+                    />
+                </div>
 
-                <AutocompleteInput
-                    label="Series"
-                    options={series}
-                    onQueryChange={(value)=>{
-                        setSerieQuery(value);
-                        setValue(
-                            "seriesName",
-                            value,
-                            {
-                                shouldDirty: true,
-                                shouldValidate: true
-                            }
+                <div className="book-detail">
+                    <AutocompleteInput
+                        label="Series"
+                        options={series}
+                        onQueryChange={(value)=>{
+                            setSerieQuery(value);
+                            setValue(
+                                "seriesName",
+                                value,
+                                {
+                                    shouldDirty: true,
+                                    shouldValidate: true
+                                }
 
-                        );
-                    }}
-                    onSelect={(serie)=>{
-                        setValue(
-                            "seriesName",
-                            serie.name,
-                            {
-                                shouldDirty: true,
-                                shouldValidate: true
-                            }
-                        );
-                    }}
-                />
+                            );
+                        }}
+                        onSelect={(serie)=>{
+                            setValue(
+                                "seriesName",
+                                serie.name,
+                                {
+                                    shouldDirty: true,
+                                    shouldValidate: true
+                                }
+                            );
+                        }}
+                    />
+                </div>
 
-                <TextInput
-                    label="Series number"
-                    type="number"
-                    {...register("seriesNumber", {valueAsNumber:true})}
-                />
+                <div className="book-detail">
+                    <TextInput
+                        label="Series number"
+                        type="number"
+                        {...register("seriesNumber", {valueAsNumber:true})}
+                    />
+                </div>
             </div>
-
         </section>
     );
 }
