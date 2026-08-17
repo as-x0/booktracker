@@ -10,6 +10,7 @@ import Button from "../../../components/common/Button";
 import SelectInput from "../../../components/common/SelectInput";
 import AutocompleteInput from "../../../components/common/AutocompleteInput";
 import RatingInput from "../../../components/common/RatingInput/RatingInput";
+import RichTextEditor from "../../common/RichTextEditor/RichTextEditor.tsx";
 
 import "./ReadingDetailsSection.css";
 
@@ -338,39 +339,27 @@ export default function ReadingDetailsSection({
                         />
                     </div>
 
-                    <div>
-                        <label>Review</label>
+                    <RichTextEditor
+                        label="Review"
+                        value={formData.review ?? ""}
+                        onChange={(value) =>
+                            updateField(
+                                "review",
+                                value || null
+                            )
+                        }
+                    />
 
-                        <textarea
-                            rows={5}
-                            value={
-                                formData.review ?? ""
-                            }
-                            onChange={(event) =>
-                                updateField(
-                                    "review",
-                                    event.target.value || null
-                                )
-                            }
-                        />
-                    </div>
-
-                    <div>
-                        <label>Characters</label>
-
-                        <textarea
-                            rows={5}
-                            value={
-                                formData.characters ?? ""
-                            }
-                            onChange={(event) =>
-                                updateField(
-                                    "characters",
-                                    event.target.value || null
-                                )
-                            }
-                        />
-                    </div>
+                    <RichTextEditor
+                        label="Characters"
+                        value={formData.characters ?? ""}
+                        onChange={(value) =>
+                            updateField(
+                                "characters",
+                                value || null
+                            )
+                        }
+                    />
 
                     {isDnf && (
                         <div>
@@ -482,19 +471,29 @@ export default function ReadingDetailsSection({
                     )}
 
                 {reading.review && (
-                    <p className="reading-detail reading-detail-full">
-                        <strong>Review:</strong>{" "}
-                        {reading.review}
-                    </p>
+                    <div className="reading-detail reading-detail-full">
+                        <strong>Review:</strong>
+
+                        <div
+                            className="rich-text-content"
+                            dangerouslySetInnerHTML={{
+                                __html: reading.review
+                            }}
+                        />
+                    </div>
                 )}
 
                 {reading.characters && (
-                    <p className="reading-detail reading-detail-full">
-                        <strong>
-                            Characters:
-                        </strong>{" "}
-                        {reading.characters}
-                    </p>
+                    <div className="reading-detail reading-detail-full">
+                        <strong>Characters:</strong>
+
+                        <div
+                            className="rich-text-content"
+                            dangerouslySetInnerHTML={{
+                                __html: reading.characters
+                            }}
+                        />
+                    </div>
                 )}
 
                 {isDnf &&

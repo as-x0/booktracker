@@ -17,6 +17,7 @@ import DateInput from "../../common/DateInput";
 import RatingInput from "../../common/RatingInput/RatingInput.tsx";
 import TextArea from "../../common/TextArea";
 import AutocompleteInput from "../../common/AutocompleteInput.tsx";
+import RichTextEditor from "../../common/RichTextEditor/RichTextEditor.tsx";
 
 import type { ReadingFormData } from "../../../forms/ReadingForm/ReadingForm";
 
@@ -110,14 +111,20 @@ export default function ReadingInfoSection({
                     }
                 />
 
-                <TextArea
+                <RichTextEditor
                     label="Review"
-                    {...register("review")}
+                    value={watch("review")}
+                    onChange={(value) =>
+                        setValue("review", value)
+                    }
                 />
 
-                <TextArea
+                <RichTextEditor
                     label="Characters"
-                    {...register("characters")}
+                    value={watch("characters")}
+                    onChange={(value) =>
+                        setValue("characters", value)
+                    }
                 />
 
                 {isDnf && (
