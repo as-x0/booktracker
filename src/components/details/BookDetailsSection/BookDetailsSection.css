@@ -22,12 +22,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem 1.5rem;
+    align-items: start;
 }
 
 .book-details-edit-grid{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem 1.5rem;
+    align-items: start;
 }
 
 .book-detail {
