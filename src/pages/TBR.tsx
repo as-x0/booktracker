@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import WishlistForm from "../forms/WishlistForm/WishlistForm";
+import ReadingForm from "../forms/ReadingForm/ReadingForm.tsx";
 import WishlistTable from "../components/WishlistTable";
 import Button from "../components/common/Button";
 
@@ -11,6 +12,7 @@ import type { WishlistWithDetails } from "../types/WishlistWithDetails";
 function TBR() {
     const [showForm, setShowForm] = useState(false);
     const [wishlist, setWishlist] = useState<WishlistWithDetails[]>([]);
+    const [selectedWishlist, setSelectedWishlist] = useState<WishlistWithDetails | null>(null);
 
     async function loadWishlist() {
         const data = await getWishlist();
@@ -47,8 +49,24 @@ function TBR() {
                 )
             }
 
+            {
+                selectedWishlist && (
+                    <ReadingForm
+                        wishlistItem={selectedWishlist}
+                        onSaved={() => {
+                            setSelectedWishlist(null);
+                            void loadWishlist();
+                        }}
+                    />
+                )
+            }
+
             <WishlistTable
                 wishlist={wishlist}
+                onStartReading={(item) => {
+                    console.log("Start Reading: ", item);
+                    setSelectedWishlist(item)
+                }}
             />
         </div>
     );

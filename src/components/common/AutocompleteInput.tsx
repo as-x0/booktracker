@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./AutocompleteInput.css";
 
 export interface Option {
@@ -9,9 +9,7 @@ export interface Option {
 interface AutocompleteInputProps {
     label: string;
     options: Option[];
-
     value?: string;
-
     onSelect: (option: Option) => void;
     onQueryChange?: (query: string) => void;
 }
@@ -19,24 +17,13 @@ interface AutocompleteInputProps {
 export default function AutocompleteInput({
     label,
     options,
-    value,
+    value = "",
     onSelect,
     onQueryChange
 }: AutocompleteInputProps) {
 
     const [query, setQuery] = useState(value ?? "");
     const [showOptions, setShowOptions] = useState(false);
-
-    /*
-     * Se il valore viene modificato dall'esterno
-     * (per esempio quando carichiamo i dati durante l'editing),
-     * aggiorniamo anche il valore visualizzato.
-     */
-    useEffect(() => {
-        if (value !== undefined) {
-            setQuery(value);
-        }
-    }, [value]);
 
     function handleChange(
         event: React.ChangeEvent<HTMLInputElement>

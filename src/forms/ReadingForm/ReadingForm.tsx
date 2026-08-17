@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     useForm,
     type UseFormRegister,
@@ -11,8 +11,10 @@ import BookInfoSection from "../../components/forms/BookInfoSection/BookInfoSect
 import ReadingInfoSection from "../../components/forms/ReadingInfoSection/ReadingInfoSection";
 
 import type { BookFormData } from "../../types/BookFormData.ts";
+import type { WishlistWithDetails } from "../../types/WishlistWithDetails.ts";
 
-import {saveReading} from "../../services/saveReading.ts";
+import { saveReading } from "../../services/saveReading.ts";
+import { updateWishlist } from "../../services/wishlistService.ts";
 
 import "./ReadingForm.css";
 
@@ -34,7 +36,15 @@ export interface ReadingFormData extends BookFormData {
     coverUrl: string;
 }
 
-export default function ReadingForm() {
+interface ReadingFormProps {
+    wishlistItem?: WishlistWithDetails;
+    onSaved?: () => void;
+}
+
+export default function ReadingForm({
+    wishlistItem,
+    onSaved
+}: ReadingFormProps) {
     const {
         register,
         handleSubmit,
@@ -50,6 +60,21 @@ export default function ReadingForm() {
         text: string;
     } | null>(null);
 
+    useEffect(() => {
+        if(!wishlistItem) return;
+
+        const book = wishlistItem.book;
+        setValue("title", book.title);
+        setValue("authorName", book.author.name);
+        setValue("birthCountryName", book.author.birth_country?.name ?? "")
+        setValue("genreId", book.genre.id);
+        setValue("publicationYear", book.publication_year ?? 0);
+        setValue("originalLanguageName", book.original_language_id ?? "");
+        setValue("seriesName", book.series?.name ?? "");
+        setValue("seriesNumber", book.series_number ?? 0);
+        setValue("themes", book.themes ?? "");
+    }, [wishlistItem, setValue]);
+
     async function onSubmit(data: ReadingFormData) {
         console.log("FORM DATA:", data);
 
@@ -63,11 +88,20 @@ export default function ReadingForm() {
                 readingId
             );
 
+            if(wishlistItem){
+                await updateWishlist(
+                    wishlistItem.id,
+                    {startedAt: data.startDate}
+                );
+            }
+
             setMessage({
                 type: "success",
                 text: "Reading saved successfully",
             });
             reset();
+
+            onSaved?.();
         } catch(error) {
             console.error(error);
             setMessage({

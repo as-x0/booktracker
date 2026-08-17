@@ -4,10 +4,12 @@ import "./WishlistTable.css";
 
 interface WishlistTableProps {
     wishlist: WishlistWithDetails[];
+    onStartReading: (item: WishlistWithDetails) => void;
 }
 
 function WishlistTable({
-    wishlist
+    wishlist,
+    onStartReading,
 }: WishlistTableProps) {
     const navigate = useNavigate();
 
@@ -15,6 +17,7 @@ function WishlistTable({
         <table className="wishlist-table">
             <thead>
             <tr>
+                <th></th>
                 <th>Title</th>
                 <th>Author</th>
                 <th>Genre</th>
@@ -30,6 +33,18 @@ function WishlistTable({
                         onClick={() => navigate(`/tbr/${item.id}`)}
                         className="wishlist-table-row"
                     >
+                        <td>
+                            <input
+                                type="checkbox"
+                                checked={item.started_at !== null}
+                                onClick={(event) => event.stopPropagation()}
+                                onChange={() => {
+                                    if(item.started_at === null) {
+                                        onStartReading(item)
+                                    }
+                                }}
+                            />
+                        </td>
                         <td>{item.book.title}</td>
                         <td>{item.book.author.name}</td>
                         <td>{item.book.genre?.name ?? "-"}</td>
