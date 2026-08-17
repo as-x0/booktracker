@@ -96,13 +96,15 @@ export default function WishlistDetailsSection({
                         }
                     />
 
-                    <TextArea
-                        label="Notes"
-                        value={notes}
-                        onChange={(event) =>
-                            setNotes(event.target.value)
-                        }
-                    />
+                    <div className="wishlist-detail-full">
+                        <TextArea
+                            label="Notes"
+                            value={notes}
+                            onChange={(event) =>
+                                setNotes(event.target.value)
+                            }
+                        />
+                    </div>
                 </div>
             </section>
         );
@@ -140,14 +142,16 @@ export default function WishlistDetailsSection({
                     </p>
                 )}
 
-                {wishlist.notes && (
-                    <p className="wishlist-detail wishlist-detail-full">
-                        <strong>
-                            Notes:
-                        </strong>{" "}
-                        {wishlist.notes}
-                    </p>
-                )}
+                <div className="wishlist-detail-full">
+                    {wishlist.notes && (
+                        <p className="wishlist-detail wishlist-detail-full">
+                            <strong>
+                                Notes:
+                            </strong>{" "}
+                            {wishlist.notes}
+                        </p>
+                    )}
+                </div>
             </div>
         </section>
     );
