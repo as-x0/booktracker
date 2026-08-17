@@ -51,58 +51,60 @@ export default function ReadingInfoSection({
             </h3>
 
             <div className="reading-info-grid">
+                <div className="reading-detail reading-detail-2">
+                    <DateInput
+                        label="Start date"
+                        {...register("startDate")}
+                    />
+                </div>
 
+                <div className="reading-detail reading-detail-2">
+                    <DateInput
+                        label="Finish date"
+                        {...register("finishDate")}
+                    />
+                </div>
 
+                <div className="reading-detail reading-detail-2">
+                    <SelectInput
+                        label="Status"
+                        options={statuses}
+                        value={watch("statusId")}
+                        onChange={(value) =>
+                            setValue("statusId", value)
+                        }
+                    />
+                </div>
 
+                <div className="reading-detail reading-detail-full">
+                    <AutocompleteInput
+                        label="Reading language"
+                        options={languages}
+                        onQueryChange={(query)=>{setLanguageQuery(query);}}
+                        onSelect={(language)=>{
+                            setValue(
+                                "readingLanguageId",
+                                language.id
+                            );
+                        }}
+                    />
+                </div>
 
+                <div className="reading-detail reading-detail-3">
+                    <TextInput
+                        label="Total pages"
+                        type="number"
+                        {...register("pagesTotal", {valueAsNumber:true})}
+                    />
+                </div>
 
-                <TextInput
-                    label="Cover URL"
-                    {...register("coverUrl")}
-                />
-
-                <SelectInput
-                    label="Status"
-                    options={statuses}
-                    value={watch("statusId")}
-                    onChange={(value) =>
-                        setValue("statusId", value)
-                    }
-                />
-
-                <AutocompleteInput
-                    label="Reading language"
-                    options={languages}
-                    onQueryChange={(query)=>{setLanguageQuery(query);}}
-                    onSelect={(language)=>{
-                        setValue(
-                            "readingLanguageId",
-                            language.id
-                        );
-                    }}
-                />
-
-                <DateInput
-                    label="Start date"
-                    {...register("startDate")}
-                />
-
-                <DateInput
-                    label="Finish date"
-                    {...register("finishDate")}
-                />
-
-                <TextInput
-                    label="Total pages"
-                    type="number"
-                    {...register("pagesTotal", {valueAsNumber:true})}
-                />
-
-                <TextInput
-                    label="Pages read"
-                    type="number"
-                    {...register("pagesRead", {valueAsNumber:true})}
-                />
+                <div className="reading-detail reading-detail-3">
+                    <TextInput
+                        label="Pages read"
+                        type="number"
+                        {...register("pagesRead", {valueAsNumber:true})}
+                    />
+                </div>
 
                 <RatingInput
                     label="Rating"
@@ -116,28 +118,41 @@ export default function ReadingInfoSection({
                     }
                 />
 
-                <RichTextEditor
-                    label="Review"
-                    value={watch("review")}
-                    onChange={(value) =>
-                        setValue("review", value)
-                    }
-                />
-
-                <RichTextEditor
-                    label="Characters"
-                    value={watch("characters")}
-                    onChange={(value) =>
-                        setValue("characters", value)
-                    }
-                />
-
-                {isDnf && (
-                    <TextArea
-                        label="DNF reason"
-                        {...register("dnfReason")}
+                <div className="reading-detail reading-detail-full">
+                    <RichTextEditor
+                        label="Review"
+                        value={watch("review")}
+                        onChange={(value) =>
+                            setValue("review", value)
+                        }
                     />
-                )}
+                </div>
+
+                <div className="reading-detail reading-detail-full">
+                    <RichTextEditor
+                        label="Characters"
+                        value={watch("characters")}
+                        onChange={(value) =>
+                            setValue("characters", value)
+                        }
+                    />
+                </div>
+
+                <div className="reading-detail reading-detail-full">
+                    {isDnf && (
+                        <TextArea
+                            label="DNF reason"
+                            {...register("dnfReason")}
+                        />
+                    )}
+                </div>
+
+                <div className="reading-detail reading-detail-full">
+                    <TextInput
+                        label="Cover URL"
+                        {...register("coverUrl")}
+                    />
+                </div>
             </div>
         </section>
     );

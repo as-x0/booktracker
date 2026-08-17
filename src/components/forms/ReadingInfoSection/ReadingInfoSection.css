@@ -10,6 +10,18 @@
 
 .reading-info-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem 1.5rem;
+}
+
+.reading-detail-2 {
+    grid-column: span 2;
+}
+
+.reading-detail-3 {
+    grid-column: span 3;
+}
+
+.reading-detail-full {
+    grid-column: 1 / -1;
 }
