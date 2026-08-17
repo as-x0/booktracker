@@ -21,8 +21,9 @@
 }
 
 /* Back */
-.reading-details > button {
+.wishlist-details > button {
     align-self: flex-start;
+    width: fit-content;
 }
 
 /* Header */
