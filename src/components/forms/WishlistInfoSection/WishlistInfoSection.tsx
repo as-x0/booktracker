@@ -50,12 +50,14 @@ export default function WishlistInfoSection({
                     )}
                 />
 
-                <TextInput
-                    label="Notes"
-                    {...register(
-                        "notes"
-                    )}
-                />
+                <div className="wishlist-detail-full">
+                    <TextInput
+                        label="Notes"
+                        {...register(
+                            "notes"
+                        )}
+                    />
+                </div>
             </div>
         </section>
     );

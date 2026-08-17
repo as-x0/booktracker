@@ -9,6 +9,10 @@
 
 .wishlist-info-grid {
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:1rem;
+    grid-template-columns: 1fr 1fr;
+    gap:1rem 1.5rem;
+}
+
+.wishlist-detail-full{
+    grid-column: 1 / -1;
 }
