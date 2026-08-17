@@ -167,48 +167,61 @@ export default function BookDetailsSection({
                 </div>
 
                 <div className="book-details-grid">
-                    {book.genre?.name && (
-                        <p className="book-detail">
-                            <strong>Genre:</strong>{" "}
-                            {book.genre.name}
-                        </p>
-                    )}
-
-                    {book.themes && (
-                        <p className="book-detail">
-                            <strong>Themes:</strong>{" "}
-                            {book.themes}
-                        </p>
-                    )}
-
-                    {book.publication_year && (
-                        <p className="book-detail">
-                            <strong>Publication year:</strong>{" "}
-                            {book.publication_year}
-                        </p>
-                    )}
-
-                    {book.original_language?.name && (
-                        <p className="book-detail">
-                            <strong>Original language:</strong>{" "}
-                            {book.original_language.name}
-                        </p>
-                    )}
-
-                    {book.series?.name && (
-                        <p className="book-detail">
-                            <strong>Series:</strong>{" "}
-                            {book.series.name}
-                        </p>
-                    )}
-
-                    {book.series_number !== null &&
-                        book.series_number !== undefined && (
+                    <div className="book-detail">
+                        {book.genre?.name && (
                             <p className="book-detail">
-                                <strong>Series number:</strong>{" "}
-                                {book.series_number}
+                                <strong>Genre:</strong>{" "}
+                                {book.genre.name}
                             </p>
                         )}
+                    </div>
+
+                    <div className="book-detail">
+                        {book.themes && (
+                            <p className="book-detail">
+                                <strong>Themes:</strong>{" "}
+                                {book.themes}
+                            </p>
+                        )}
+                    </div>
+
+                    <div className="book-detail">
+                        {book.publication_year && (
+                            <p className="book-detail">
+                                <strong>Publication year:</strong>{" "}
+                                {book.publication_year}
+                            </p>
+                        )}
+                    </div>
+
+                    <div className="book-detail">
+                        {book.original_language?.name && (
+                            <p className="book-detail">
+                                <strong>Original language:</strong>{" "}
+                                {book.original_language.name}
+                            </p>
+                        )}
+                    </div>
+
+                    <div className="book-detail">
+                        {book.series?.name && (
+                            <p className="book-detail">
+                                <strong>Series:</strong>{" "}
+                                {book.series.name}
+                            </p>
+                        )}
+                    </div>
+
+                    <div className="book-detail">
+                        {book.series_number !== null &&
+                            book.series_number !== undefined && (
+                                <p className="book-detail">
+                                    <strong>Series number:</strong>{" "}
+                                    {book.series_number}
+                                </p>
+                            )
+                        }
+                    </div>
                 </div>
             </section>
         );
@@ -237,103 +250,121 @@ export default function BookDetailsSection({
             </div>
 
             <div className="book-details-edit-grid">
-                <TextInput
-                    label="Title"
-                    value={title}
-                    onChange={(event) => setTitle(event.target.value)}
-                />
+                <div className="book-detail book-detail-full">
+                    <TextInput
+                        label="Title"
+                        value={title}
+                        onChange={(event) => setTitle(event.target.value)}
+                    />
+                </div>
 
-                <AutocompleteInput
-                    label="Author"
-                    value={authorName}
-                    options={authors}
-                    onQueryChange={(value) => {
-                        setAuthorQuery(value);
-                        setAuthorName(value);
-                    }}
-                    onSelect={(author) => {
-                        setAuthorName(author.name);
-                    }}
-                />
+                <div className="book-detail">
+                    <AutocompleteInput
+                        label="Author"
+                        value={authorName}
+                        options={authors}
+                        onQueryChange={(value) => {
+                            setAuthorQuery(value);
+                            setAuthorName(value);
+                        }}
+                        onSelect={(author) => {
+                            setAuthorName(author.name);
+                        }}
+                    />
+                </div>
 
-                <AutocompleteInput
-                    label="Birth country"
-                    value={birthCountryName}
-                    options={countries}
-                    onQueryChange={(value) => {
-                        setCountryQuery(value);
-                        setBirthCountryName(value);
-                    }}
-                    onSelect={(country) => {
-                        setBirthCountryName(country.name);
-                    }}
-                />
+                <div className="book-detail">
+                    <AutocompleteInput
+                        label="Birth country"
+                        value={birthCountryName}
+                        options={countries}
+                        onQueryChange={(value) => {
+                            setCountryQuery(value);
+                            setBirthCountryName(value);
+                        }}
+                        onSelect={(country) => {
+                            setBirthCountryName(country.name);
+                        }}
+                    />
+                </div>
 
-                <SelectInput
-                    label="Genre"
-                    options={genres}
-                    value={genreId}
-                    onChange={setGenreId}
-                />
+                <div className="book-detail">
+                    <SelectInput
+                        label="Genre"
+                        options={genres}
+                        value={genreId}
+                        onChange={setGenreId}
+                    />
+                </div>
 
-                <TextInput
-                    label="Themes"
-                    value={themes}
-                    onChange={(event) =>
-                        setThemes(event.target.value)
-                    }
-                />
+                <div className="book-detail">
+                    <TextInput
+                        label="Themes"
+                        value={themes}
+                        onChange={(event) =>
+                            setThemes(event.target.value)
+                        }
+                    />
+                </div>
 
-                <TextInput
-                    label="Publication year"
-                    type="number"
-                    value={publicationYear}
-                    onChange={(event) =>
-                        setPublicationYear(
-                            event.target.value
-                        )
-                    }
-                />
+                <div className="book-detail">
+                    <TextInput
+                        label="Publication year"
+                        type="number"
+                        value={publicationYear}
+                        onChange={(event) =>
+                            setPublicationYear(
+                                event.target.value
+                            )
+                        }
+                    />
+                </div>
 
-                <AutocompleteInput
-                    label="Original language"
-                    value={originalLanguageName}
-                    options={languages}
-                    onQueryChange={(value) => {
-                        setLanguageQuery(value);
-                        setOriginalLanguageName(value);
-                    }}
-                    onSelect={(language) => {
-                        setOriginalLanguageName(language.id);
-                        setOriginalLanguageName(
-                            language.name
-                        );
-                    }}
-                />
+                <div className="book-detail">
+                    <AutocompleteInput
+                        label="Original language"
+                        value={originalLanguageName}
+                        options={languages}
+                        onQueryChange={(value) => {
+                            setLanguageQuery(value);
+                            setOriginalLanguageName(value);
+                        }}
+                        onSelect={(language) => {
+                            setOriginalLanguageName(language.id);
+                            setOriginalLanguageName(
+                                language.name
+                            );
+                        }}
+                    />
+                </div>
 
-                <AutocompleteInput
-                    label="Series"
-                    value={seriesName}
-                    options={series}
-                    onQueryChange={(value) => {
-                        setSeriesQuery(value);
-                        setSeriesName(value);
-                    }}
-                    onSelect={(serie) => {
-                        setSeriesName(serie.name);
-                    }}
-                />
+                <div className="book-detail">
+                    <AutocompleteInput
+                        label="Series"
+                        value={seriesName}
+                        options={series}
+                        onQueryChange={(value) => {
+                            setSeriesQuery(value);
+                            setSeriesName(value);
+                        }}
+                        onSelect={(serie) => {
+                            setSeriesName(serie.name);
+                        }}
+                    />
+                </div>
 
-                <TextInput
-                    label="Series number"
-                    type="number"
-                    value={seriesNumber}
-                    onChange={(event) =>
-                        setSeriesNumber(
-                            event.target.value
-                        )
-                    }
-                />
+                <div className="book-detail">
+                    <TextInput
+                        label="Series number"
+                        type="number"
+                        value={seriesNumber}
+                        onChange={(event) =>
+                            setSeriesNumber(
+                                event.target.value
+                            )
+                        }
+                    />
+                </div>
             </div>
         </section>
     )
