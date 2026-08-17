@@ -30,7 +30,7 @@ export default function BookInfoSection({
       register,
       watch,
       setValue
-  }: BookInfoSectionProps) {
+}: BookInfoSectionProps) {
     const genres = useGenres();
 
     const [languageQuery, setLanguageQuery] = useState("");
@@ -46,6 +46,11 @@ export default function BookInfoSection({
     const series = useSeries(serieQuery);
 
     return (
+        console.log("author:", watch("authorName")),
+        console.log("birth country:", watch("birthCountryName")),
+        console.log("original language:", watch("originalLanguageName")),
+        console.log("series:", watch("seriesName")),
+
         <section className="book-info-section">
             <h3>
                 Book Information
@@ -63,6 +68,7 @@ export default function BookInfoSection({
                     <AutocompleteInput
                         label="Author"
                         options={authors}
+                        value={watch("authorName")}
                         onQueryChange={(value)=>{
                             setAuthorQuery(value);
                             setValue("authorName", value);
@@ -77,6 +83,7 @@ export default function BookInfoSection({
                     <AutocompleteInput
                         label="Birth country"
                         options={countries}
+                        value={watch("birthCountryName")}
                         onQueryChange={(value)=>{
                             setCountryQuery(value);
                             setValue("birthCountryName", value);
@@ -120,6 +127,7 @@ export default function BookInfoSection({
                     <AutocompleteInput
                         label="Original language"
                         options={languages}
+                        value={watch("originalLanguageName")}
                         onQueryChange={(value) => {
                             setLanguageQuery(value);
                             setValue("originalLanguageName", value);
@@ -134,6 +142,7 @@ export default function BookInfoSection({
                     <AutocompleteInput
                         label="Series"
                         options={series}
+                        value={watch("seriesName")}
                         onQueryChange={(value)=>{
                             setSerieQuery(value);
                             setValue(

@@ -61,17 +61,26 @@ export default function ReadingForm({
     } | null>(null);
 
     useEffect(() => {
-        if(!wishlistItem) return;
+        if (!wishlistItem) return;
 
         const book = wishlistItem.book;
+
+        console.log("WISHLIST ITEM:", wishlistItem);
+        console.log("BOOK:", book);
+        console.log("AUTHOR:", book.author);
+        console.log("BIRTH COUNTRY:", book.author?.birth_country);
+        console.log("ORIGINAL LANGUAGE:", book.original_language);
+        console.log("SERIES:", book.series);
+
+
         setValue("title", book.title);
-        setValue("authorName", book.author.name);
-        setValue("birthCountryName", book.author.birth_country?.name ?? "")
+        setValue("authorName", book.author?.name ?? "");
+        setValue("birthCountryName", book.author.birth_country?.name ?? "");
         setValue("genreId", book.genre.id);
-        setValue("publicationYear", book.publication_year ?? 0);
-        setValue("originalLanguageName", book.original_language_id ?? "");
-        setValue("seriesName", book.series?.name ?? "");
-        setValue("seriesNumber", book.series_number ?? 0);
+        setValue("publicationYear", book.publication_year ?? undefined);
+        setValue("originalLanguageName", book.original_language?.name);
+        setValue("seriesName", book.series?.name);
+        setValue("seriesNumber", book.series_number ?? undefined);
         setValue("themes", book.themes ?? "");
     }, [wishlistItem, setValue]);
 

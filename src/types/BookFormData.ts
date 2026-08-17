@@ -8,10 +8,10 @@ export interface BookFormData {
 
     themes: string;
 
-    publicationYear: number;
+    publicationYear?: number;
 
     originalLanguageName: string;
 
-    seriesName: string;
-    seriesNumber: number;
+    seriesName?: string;
+    seriesNumber?: number;
 }

@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Underline from "@tiptap/extension-underline";
 
 import "./RichTextEditor.css";
 
@@ -22,7 +21,6 @@ export default function RichTextEditor({
     const editor = useEditor({
         extensions: [
             StarterKit,
-            Underline
         ],
 
         content: value,
@@ -38,13 +36,6 @@ export default function RichTextEditor({
         }
     });
 
-    /*
-     * Aggiorna l'editor quando il valore esterno cambia.
-     *
-     * È importante soprattutto nell'editing:
-     * quando carichiamo una Reading esistente,
-     * il contenuto dell'editor deve essere aggiornato.
-     */
     useEffect(() => {
 
         if (!editor) {

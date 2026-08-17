@@ -44,8 +44,13 @@ export async function getWishlist(): Promise<WishlistWithDetails[]> {
             *,
             book:books(
                 *,
-                author:authors(*),
-                genre:genres(*)
+                author:authors(
+                    *,
+                    birth_country: countries(*)
+                ),
+                genre:genres(*),
+                original_language: languages(*),
+                series: series(*)
             ),
             availability:availability(*)
         `)
@@ -68,7 +73,10 @@ export async function getWishlistById(id: string): Promise<WishlistWithDetails |
             *,
             book:books(
                 *,
-                author:authors(*),
+                author:authors(
+                    *,
+                    birth_country: countries(*)
+                ),
                 genre:genres(*),
                 original_language:languages(*),
                 series:series(*)

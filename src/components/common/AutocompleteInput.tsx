@@ -22,7 +22,6 @@ export default function AutocompleteInput({
     onQueryChange
 }: AutocompleteInputProps) {
 
-    const [query, setQuery] = useState(value ?? "");
     const [showOptions, setShowOptions] = useState(false);
 
     function handleChange(
@@ -30,15 +29,12 @@ export default function AutocompleteInput({
     ) {
         const newValue = event.target.value;
 
-        setQuery(newValue);
         onQueryChange?.(newValue);
         setShowOptions(true);
     }
 
     function handleSelect(option: Option) {
-        setQuery(option.name);
         setShowOptions(false);
-
         onSelect(option);
     }
 
@@ -50,7 +46,7 @@ export default function AutocompleteInput({
 
             <input
                 type="text"
-                value={query}
+                value={value}
                 onChange={handleChange}
                 onFocus={() => setShowOptions(true)}
             />
