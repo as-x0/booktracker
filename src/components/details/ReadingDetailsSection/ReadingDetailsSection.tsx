@@ -208,107 +208,118 @@ export default function ReadingDetailsSection({
                 </div>
 
                 <div className="reading-details-grid">
+                    <div className="reading-detail reading-detail-2">
+                        <div>
+                            <label>Start date</label>
 
-                    <SelectInput
-                        label="Status"
-                        options={statuses}
-                        value={formData.statusId}
-                        onChange={(value) =>
-                            updateField(
-                                "statusId",
-                                value
-                            )
-                        }
-                    />
+                            <input
+                                type="date"
+                                value={
+                                    formData.startDate ?? ""
+                                }
+                                onChange={(event) =>
+                                    updateField(
+                                        "startDate",
+                                        event.target.value || null
+                                    )
+                                }
+                            />
+                        </div>
+                    </div>
 
-                    <AutocompleteInput
-                        label="Reading language"
-                        options={languages}
-                        onQueryChange={
-                            setLanguageQuery
-                        }
-                        onSelect={(language) =>
-                            updateField(
-                                "readingLanguageId",
-                                language.id
-                            )
-                        }
-                    />
+                    <div className="reading-detail reading-detail-2">
+                        <div>
+                            <label>Finish date</label>
 
-                    <div>
-                        <label>Start date</label>
+                            <input
+                                type="date"
+                                value={
+                                    formData.finishDate ?? ""
+                                }
+                                onChange={(event) =>
+                                    updateField(
+                                        "finishDate",
+                                        event.target.value || null
+                                    )
+                                }
+                            />
+                        </div>
+                    </div>
 
-                        <input
-                            type="date"
-                            value={
-                                formData.startDate ?? ""
-                            }
-                            onChange={(event) =>
+                    <div className="reading-detail reading-detail-2">
+                        <SelectInput
+                            label="Status"
+                            options={statuses}
+                            value={formData.statusId}
+                            onChange={(value) =>
                                 updateField(
-                                    "startDate",
-                                    event.target.value || null
+                                    "statusId",
+                                    value
                                 )
                             }
                         />
                     </div>
 
-                    <div>
-                        <label>Finish date</label>
-
-                        <input
-                            type="date"
-                            value={
-                                formData.finishDate ?? ""
+                    <div className="reading-detail reading-detail-full">
+                        <AutocompleteInput
+                            label="Reading language"
+                            options={languages}
+                            onQueryChange={
+                                setLanguageQuery
                             }
-                            onChange={(event) =>
+                            onSelect={(language) =>
                                 updateField(
-                                    "finishDate",
-                                    event.target.value || null
+                                    "readingLanguageId",
+                                    language.id
                                 )
                             }
                         />
                     </div>
 
-                    <div>
-                        <label>Total pages</label>
+                    <div className="reading-detail reading-detail-3">
+                        <div>
+                            <label>Total pages</label>
 
-                        <input
-                            type="number"
-                            value={
-                                formData.pagesTot ?? ""
-                            }
-                            onChange={(event) =>
-                                updateField(
-                                    "pagesTot",
-                                    event.target.value === ""
-                                        ? null
-                                        : Number(
-                                            event.target.value
-                                        )
-                                )
-                            }
-                        />
+                            <input
+                                type="number"
+                                value={
+                                    formData.pagesTot ?? ""
+                                }
+                                onChange={(event) =>
+                                    updateField(
+                                        "pagesTot",
+                                        event.target.value === ""
+                                            ? null
+                                            : Number(
+                                                event.target.value
+                                            )
+                                    )
+                                }
+                            />
+                        </div>
                     </div>
 
-                    <div>
-                        <label>Pages read</label>
+                    <div className="reading-detail reading-detail-3">
+                        <div>
+                            <label>Pages read</label>
 
-                        <input
-                            type="number"
-                            value={
-                                formData.pagesRead ?? ""
-                            }
-                            onChange={(event) =>
-                                updateField(
-                                    "pagesRead",
-                                    event.target.value === ""
-                                        ? null
-                                        : Number(
-                                            event.target.value
-                                        )
-                                )
-                            }
-                        />
+                            <input
+                                type="number"
+                                value={
+                                    formData.pagesRead ?? ""
+                                }
+                                onChange={(event) =>
+                                    updateField(
+                                        "pagesRead",
+                                        event.target.value === ""
+                                            ? null
+                                            : Number(
+                                                event.target.value
+                                            )
+                                    )
+                                }
+                            />
+                        </div>
                     </div>
 
                     <RatingInput
@@ -322,64 +333,71 @@ export default function ReadingDetailsSection({
                         }
                     />
 
-                    <div>
-                        <label>Cover URL</label>
-
-                        <input
-                            type="text"
-                            value={
-                                formData.coverUrl ?? ""
-                            }
-                            onChange={(event) =>
+                    <div className="reading-detail reading-detail-full">
+                        <RichTextEditor
+                            label="Review"
+                            value={formData.review ?? ""}
+                            onChange={(value) =>
                                 updateField(
-                                    "coverUrl",
-                                    event.target.value || null
+                                    "review",
+                                    value || null
                                 )
                             }
                         />
                     </div>
 
-                    <RichTextEditor
-                        label="Review"
-                        value={formData.review ?? ""}
-                        onChange={(value) =>
-                            updateField(
-                                "review",
-                                value || null
-                            )
-                        }
-                    />
+                    <div className="reading-detail reading-detail-full">
+                        <RichTextEditor
+                            label="Characters"
+                            value={formData.characters ?? ""}
+                            onChange={(value) =>
+                                updateField(
+                                    "characters",
+                                    value || null
+                                )
+                            }
+                        />
+                    </div>
 
-                    <RichTextEditor
-                        label="Characters"
-                        value={formData.characters ?? ""}
-                        onChange={(value) =>
-                            updateField(
-                                "characters",
-                                value || null
-                            )
-                        }
-                    />
+                    <div className="reading-detail reading-detail-full">
+                        {isDnf && (
+                            <div>
+                                <label>DNF reason</label>
 
-                    {isDnf && (
+                                <textarea
+                                    rows={5}
+                                    value={
+                                        formData.dnfReason ?? ""
+                                    }
+                                    onChange={(event) =>
+                                        updateField(
+                                            "dnfReason",
+                                            event.target.value || null
+                                        )
+                                    }
+                                />
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="reading-detail reading-detail-full">
                         <div>
-                            <label>DNF reason</label>
+                            <label>Cover URL</label>
 
-                            <textarea
-                                rows={5}
+                            <input
+                                type="text"
                                 value={
-                                    formData.dnfReason ?? ""
+                                    formData.coverUrl ?? ""
                                 }
                                 onChange={(event) =>
                                     updateField(
-                                        "dnfReason",
+                                        "coverUrl",
                                         event.target.value || null
                                     )
                                 }
                             />
                         </div>
-                    )}
-
+                    </div>
                 </div>
             </section>
         );
@@ -396,10 +414,7 @@ export default function ReadingDetailsSection({
         <section className="reading-details-section">
 
             <div className="reading-details-section-header">
-
-                <h2>
-                    Reading Information
-                </h2>
+                <h2>Reading Information</h2>
 
                 <Button
                     type="button"
@@ -412,55 +427,69 @@ export default function ReadingDetailsSection({
 
             <div className="reading-details-grid">
 
-                {reading.status?.name && (
-                    <p className="reading-detail">
-                        <strong>Status:</strong>{" "}
-                        {reading.status.name}
-                    </p>
-                )}
-
-                {reading.reading_language?.name && (
-                    <p className="reading-detail">
-                        <strong>
-                            Reading language:
-                        </strong>{" "}
-                        {reading.reading_language.name}
-                    </p>
-                )}
-
-                {reading.start_date && (
-                    <p className="reading-detail">
-                        <strong>Start date:</strong>{" "}
-                        {reading.start_date}
-                    </p>
-                )}
-
-                {reading.finish_date && (
-                    <p className="reading-detail">
-                        <strong>Finish date:</strong>{" "}
-                        {reading.finish_date}
-                    </p>
-                )}
-
-                {reading.pages_tot !== null &&
-                    reading.pages_tot !== undefined && (
+                <div className="reading-detail reading-detail-2">
+                    {reading.start_date && (
                         <p className="reading-detail">
-                            <strong>
-                                Total pages:
-                            </strong>{" "}
-                            {reading.pages_tot}
+                            <strong>Start date:</strong>{" "}
+                            {reading.start_date}
                         </p>
                     )}
+                </div>
 
-                {reading.pages_read !== null &&
-                    reading.pages_read !== undefined && (
+                <div className="reading-detail reading-detail-2">
+                    {reading.finish_date && (
                         <p className="reading-detail">
-                            <strong>
-                                Pages read:
-                            </strong>{" "}
-                            {reading.pages_read}
+                            <strong>Finish date:</strong>{" "}
+                            {reading.finish_date}
                         </p>
                     )}
+                </div>
+
+                <div className="reading-detail reading-detail-2">
+                    {reading.status?.name && (
+                        <p className="reading-detail">
+                            <strong>Status:</strong>{" "}
+                            {reading.status.name}
+                        </p>
+                    )}
+                </div>
+
+                <div className="reading-detail reading-detail-full">
+                    {reading.reading_language?.name && (
+                        <p className="reading-detail">
+                            <strong>
+                                Reading language:
+                            </strong>{" "}
+                            {reading.reading_language.name}
+                        </p>
+                    )}
+                </div>
+
+                <div className="reading-detail reading-detail-3">
+                    {reading.pages_tot !== null &&
+                        reading.pages_tot !== undefined && (
+                            <p className="reading-detail">
+                                <strong>
+                                    Total pages:
+                                </strong>{" "}
+                                {reading.pages_tot}
+                            </p>
+                        )
+                    }
+                </div>
+
+                <div className="reading-detail reading-detail-3">
+                    {reading.pages_read !== null &&
+                        reading.pages_read !== undefined && (
+                            <p className="reading-detail">
+                                <strong>
+                                    Pages read:
+                                </strong>{" "}
+                                {reading.pages_read}
+                            </p>
+                        )
+                    }
+                </div>
 
                 {reading.rating !== null &&
                     reading.rating !== undefined && (
@@ -468,46 +497,52 @@ export default function ReadingDetailsSection({
                             <strong>Rating:</strong>{" "}
                             {reading.rating}
                         </p>
+                    )
+                }
+
+                <div className="reading-detail reading-detail-full">
+                    {reading.review && (
+                        <div className="reading-detail reading-detail-full">
+                            <strong>Review:</strong>
+
+                            <div
+                                className="rich-text-content"
+                                dangerouslySetInnerHTML={{
+                                    __html: reading.review
+                                }}
+                            />
+                        </div>
                     )}
+                </div>
 
-                {reading.review && (
-                    <div className="reading-detail reading-detail-full">
-                        <strong>Review:</strong>
+                <div className="reading-detail reading-detail-full">
+                    {reading.characters && (
+                        <div className="reading-detail reading-detail-full">
+                            <strong>Characters:</strong>
 
-                        <div
-                            className="rich-text-content"
-                            dangerouslySetInnerHTML={{
-                                __html: reading.review
-                            }}
-                        />
-                    </div>
-                )}
-
-                {reading.characters && (
-                    <div className="reading-detail reading-detail-full">
-                        <strong>Characters:</strong>
-
-                        <div
-                            className="rich-text-content"
-                            dangerouslySetInnerHTML={{
-                                __html: reading.characters
-                            }}
-                        />
-                    </div>
-                )}
-
-                {isDnf &&
-                    reading.dnf_reason && (
-                        <p className="reading-detail reading-detail-full">
-                            <strong>
-                                DNF reason:
-                            </strong>{" "}
-                            {reading.dnf_reason}
-                        </p>
+                            <div
+                                className="rich-text-content"
+                                dangerouslySetInnerHTML={{
+                                    __html: reading.characters
+                                }}
+                            />
+                        </div>
                     )}
+                </div>
 
+                <div className="reading-detail reading-detail-full">
+                    {isDnf &&
+                        reading.dnf_reason && (
+                            <p className="reading-detail reading-detail-full">
+                                <strong>
+                                    DNF reason:
+                                </strong>{" "}
+                                {reading.dnf_reason}
+                            </p>
+                        )
+                    }
+                </div>
             </div>
-
         </section>
     );
 }

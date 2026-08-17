@@ -20,20 +20,24 @@
 
 .reading-details-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.8rem 2rem;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem 1.5rem;
 }
 
-.reading-detail {
-    margin: 0;
+.reading-detail-2 {
+    grid-column: span 2;
 }
 
-.reading-detail strong {
-    margin-right: 0.4rem;
+.reading-detail-3 {
+    grid-column: span 3;
 }
 
 .reading-detail-full {
     grid-column: 1 / -1;
+}
+
+.reading-detail strong {
+    margin-right: 0.4rem;
 }
 
 @media (max-width: 600px) {

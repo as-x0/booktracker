@@ -46,9 +46,7 @@ export default function ReadingInfoSection({
 
     return (
         <section className="reading-info-section">
-            <h3>
-                   Reading Information
-            </h3>
+            <h3>Reading Information</h3>
 
             <div className="reading-info-grid">
                 <div className="reading-detail reading-detail-2">
