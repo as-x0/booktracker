@@ -24,6 +24,9 @@ function TBR() {
         void loadWishlist();
     }, []);
 
+    const toRead = wishlist.filter(item => item.started_at === null);
+    const started = wishlist.filter(item => item.started_at !== null);
+
     return (
         <div>
             <h1>TBR</h1>
@@ -61,13 +64,27 @@ function TBR() {
                 )
             }
 
-            <WishlistTable
-                wishlist={wishlist}
-                onStartReading={(item) => {
-                    console.log("Start Reading: ", item);
-                    setSelectedWishlist(item)
-                }}
-            />
+            <section>
+                <h2>To be read</h2>
+                <WishlistTable
+                    wishlist={toRead}
+                    onStartReading={(item) => {
+                        console.log("Start Reading: ", item);
+                        setSelectedWishlist(item);
+                    }}
+                />
+            </section>
+
+            <section>
+                <h2>Started</h2>
+                <WishlistTable
+                    wishlist={started}
+                    onStartReading={(item) => {
+                        console.log("Start Reading: ", item);
+                        setSelectedWishlist(item);
+                    }}
+                />
+            </section>
         </div>
     );
 }
