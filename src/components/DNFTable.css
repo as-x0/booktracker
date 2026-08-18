@@ -1,23 +1,23 @@
-.wishlist-table {
+.dnf-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.wishlist-table th,
-.wishlist-table td {
+.dnf-table th,
+.dnf-table td {
     padding: 12px;
     border-bottom: 1px solid #ddd;
     text-align: left;
 }
 
-.wishlist-table th {
+.dnf-table th {
     font-weight: bold;
 }
 
-.wishlist-table-row {
+.dnf-table-row {
     cursor: pointer;
 }
 
-.wishlist-table-row:hover {
+.dnf-table-row:hover {
     background-color: #f5f5f5;
 }
