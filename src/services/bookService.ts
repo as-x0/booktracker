@@ -39,7 +39,7 @@ export async function findOrCreateBook(
         genreId: string;
         themes?: string;
 
-        publicationYear: number;
+        publicationYear?: number;
         originalLanguageId: string;
 
         seriesId?: string | null;

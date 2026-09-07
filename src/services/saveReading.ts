@@ -22,7 +22,7 @@ export async function saveReading(data: ReadingFormData) {
         data.seriesName
     );
     const seriesId = await findOrCreateSeries(
-        data.seriesName,
+        data.seriesName ?? ""
     );
     const originalLanguageId = await findOrCreateLanguage(
         data.originalLanguageName

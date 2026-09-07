@@ -18,7 +18,7 @@ export async function saveWishlist(
         countryId
     );
     const seriesId = await findOrCreateSeries(
-        data.seriesName
+        data.seriesName ?? ""
     );
     const originalLanguageId = await findOrCreateLanguage(
         data.originalLanguageName
