@@ -73,7 +73,8 @@ export async function getReadings(): Promise<ReadingWithDetails[]>{
             book:books(
                 *,
                 author:authors(*),
-                genre:genres(*)
+                genre:genres(*),
+                original_language:languages(*)
             ),
             status:reading_status(*)
         `)
