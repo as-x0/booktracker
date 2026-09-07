@@ -63,7 +63,7 @@ export default function WishlistDetailsSection({
                 <div className="wishlist-details-section-header">
                     <h2>Wishlist Information</h2>
 
-                    <div className="details-edit-buttons">
+                    <div className="wishlist-details-actions">
                         <Button
                             type="button"
                             onClick={handleSave}

@@ -330,10 +330,8 @@ export default function BookDetailsSection({
                             setOriginalLanguageName(value);
                         }}
                         onSelect={(language) => {
-                            setOriginalLanguageName(language.id);
-                            setOriginalLanguageName(
-                                language.name
-                            );
+                            // setOriginalLanguageName(language.id);
+                            setOriginalLanguageName(language.name);
                         }}
                     />
                 </div>

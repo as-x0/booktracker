@@ -18,6 +18,11 @@
     margin: 0;
 }
 
+.book-details-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
 .book-details-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;

@@ -186,7 +186,7 @@ export default function ReadingDetailsSection({
                 <div className="reading-details-section-header">
                     <h2>Reading Information</h2>
 
-                    <div className="details-actions">
+                    <div className="reading-details-actions">
 
                         <Button
                             type="button"
