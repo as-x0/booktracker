@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { searchAuthors } from "../services/authorService";
-import type { Author } from "../types/Author";
+import {type AuthorSearchResult, searchAuthors} from "../services/authorService";
 
 export default function useAuthors(query: string) {
-    const [authors, setAuthors] = useState<Author[]>([]);
+    const [authors, setAuthors] = useState<AuthorSearchResult[]>([]);
 
     useEffect(() => {
         async function loadAuthors() {

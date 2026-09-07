@@ -269,6 +269,9 @@ export default function BookDetailsSection({
                         }}
                         onSelect={(author) => {
                             setAuthorName(author.name);
+                            setBirthCountryName(
+                                author.birth_country?.name ?? ""
+                            );
                         }}
                     />
                 </div>

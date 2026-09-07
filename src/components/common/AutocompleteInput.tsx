@@ -6,21 +6,21 @@ export interface Option {
     name: string;
 }
 
-interface AutocompleteInputProps {
+interface AutocompleteInputProps<T extends Option> {
     label: string;
-    options: Option[];
+    options: T[];
     value?: string;
-    onSelect: (option: Option) => void;
+    onSelect: (option: T) => void;
     onQueryChange?: (query: string) => void;
 }
 
-export default function AutocompleteInput({
-    label,
-    options,
-    value = "",
-    onSelect,
-    onQueryChange
-}: AutocompleteInputProps) {
+export default function AutocompleteInput<T extends Option>({
+                                                                label,
+                                                                options,
+                                                                value = "",
+                                                                onSelect,
+                                                                onQueryChange
+                                                            }: AutocompleteInputProps<T>) {
 
     const [showOptions, setShowOptions] = useState(false);
 
@@ -33,7 +33,7 @@ export default function AutocompleteInput({
         setShowOptions(true);
     }
 
-    function handleSelect(option: Option) {
+    function handleSelect(option: T) {
         setShowOptions(false);
         onSelect(option);
     }

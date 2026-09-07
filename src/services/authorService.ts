@@ -1,17 +1,29 @@
 import { supabase } from "../supabase/client";
-import type { Author } from "../types/Author";
+import type {Author} from "../types/Author.ts";
+
+export interface AuthorSearchResult extends Author {
+    birth_country:{
+        name: string;
+    } | null;
+}
+
+export interface AuthorSearchResult extends Author {
+    birth_country: {
+        name: string;
+    } | null;
+}
 
 export async function searchAuthors(
     query: string
-): Promise<Author[]> {
+): Promise<AuthorSearchResult[]> {
 
     if (!query.trim()) {
         return [];
     }
 
-    const { data, error } = await supabase
+    const { data: authors, error } = await supabase
         .from("authors")
-        .select("*")
+        .select("id, name, birth_country_id")
         .ilike("name", `%${query}%`)
         .order("name")
         .limit(10);
@@ -20,7 +32,37 @@ export async function searchAuthors(
         throw error;
     }
 
-    return data ?? [];
+    if (!authors || authors.length === 0) {
+        return [];
+    }
+
+    const countryIds = authors
+        .map(author => author.birth_country_id)
+        .filter((id): id is string => id !== null);
+
+    if (countryIds.length === 0) {
+        return authors.map(author => ({
+            ...author,
+            birth_country: null
+        }));
+    }
+
+    const { data: countries, error: countryError } = await supabase
+        .from("countries")
+        .select("id, name")
+        .in("id", countryIds);
+
+    if (countryError) {
+        throw countryError;
+    }
+
+    return authors.map(author => ({
+        ...author,
+        birth_country:
+            countries?.find(
+                country => country.id === author.birth_country_id
+            ) ?? null
+    }));
 }
 
 export async function findOrCreateAuthor(name: string, birthCountryId: string | null): Promise<string> {

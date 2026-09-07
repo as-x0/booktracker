@@ -74,7 +74,13 @@ export default function BookInfoSection({
                             setValue("authorName", value);
                         }}
                         onSelect={(author)=>{
+                            console.log("SELECTED AUTHOR:", author);
+
                             setValue("authorName", author.name);
+                            setValue(
+                                "birthCountryName",
+                                author.birth_country?.name ?? ""
+                            );
                         }}
                     />
                 </div>
