@@ -96,7 +96,7 @@ alter table readings enable row level security;
 
 create table quotes (
     id uuid primary key default gen_random_uuid(),
-    book_id uuid not null,
+    reading_id uuid not null,
     text text not null,
     page integer,
     constraint fk_quote_book
@@ -264,3 +264,24 @@ where readings.book_id = books.id
 -- 3. Rimuove cover_url da books
 alter table books
 drop column cover_url;
+
+
+-- MIGRAZIONE QUOTES
+-- 1. Rimuove il vincolo che collega le citazioni ai libri
+alter table quotes
+drop constraint fk_quote_book;
+
+-- 2. Rimuove il riferimento al libro
+alter table quotes
+drop column book_id;
+
+-- 3. Aggiunge il riferimento alla lettura
+alter table quotes
+    add column reading_id uuid not null;
+
+-- 4. Crea il nuovo vincolo
+alter table quotes
+    add constraint fk_quote_reading
+        foreign key (reading_id)
+            references readings(id)
+            on delete cascade;
