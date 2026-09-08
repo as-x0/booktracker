@@ -3,4 +3,5 @@ export interface Quote {
     reading_id: string;
     text: string;
     page: number | null;
+    notes: string | null;
 }

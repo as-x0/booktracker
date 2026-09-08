@@ -41,3 +41,18 @@
     gap: 0.75rem;
     margin-left: 1rem;
 }
+
+.quote-details-notes {
+    margin: 0.5rem 0 0;
+}
+
+.quote-edit-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.quote-edit-notes textarea {
+    min-height: 80px;
+    resize: vertical;
+}

@@ -37,7 +37,8 @@ export default function QuotesInfoSection({
     function addQuote() {
         append({
             text: "",
-            page: undefined
+            page: undefined,
+            notes: ""
         });
     }
 
@@ -65,22 +66,23 @@ export default function QuotesInfoSection({
                     />
 
                     <div className="quote-page">
-
                         <label>
                             Page
                         </label>
-
                         <input
                             type="number"
                             min="1"
-                            {...register(
-                                `quotes.${index}.page`,
-                                {
-                                    valueAsNumber: true
-                                }
-                            )}
+                            {...register(`quotes.${index}.page`, {
+                                valueAsNumber: true
+                            })}
                         />
+                    </div>
 
+                    <div className="quote-notes">
+                        <label>Notes</label>
+                        <textarea
+                            {...register(`quotes.${index}.notes`)}
+                        />
                     </div>
 
                     <Button

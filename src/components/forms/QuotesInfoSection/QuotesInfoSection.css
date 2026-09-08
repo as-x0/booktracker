@@ -7,3 +7,14 @@
     border: 1px solid #ddd;
     border-radius: 8px;
 }
+
+.quote-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.quote-notes textarea {
+    min-height: 80px;
+    resize: vertical;
+}

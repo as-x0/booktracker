@@ -3,14 +3,16 @@ import { supabase } from "../supabase/client";
 export async function createQuote(
     readingId: string,
     text: string,
-    page: number | null
+    page: number | null,
+    notes: string | null
 ) {
     const { data, error } = await supabase
         .from("quotes")
         .insert({
             reading_id: readingId,
             text,
-            page
+            page,
+            notes
         })
         .select()
         .single();
@@ -25,13 +27,15 @@ export async function createQuote(
 export async function updateQuote(
     quoteId: string,
     text: string,
-    page: number | null
+    page: number | null,
+    notes: string | null
 ) {
     const { data, error } = await supabase
         .from("quotes")
         .update({
             text,
-            page
+            page,
+            notes
         })
         .eq("id", quoteId)
         .select()

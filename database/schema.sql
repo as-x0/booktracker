@@ -99,6 +99,7 @@ create table quotes (
     reading_id uuid not null,
     text text not null,
     page integer,
+    notes text,
     constraint fk_quote_book
         foreign key(book_id)
             references books(id)

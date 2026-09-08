@@ -67,7 +67,8 @@ export async function saveReading(data: ReadingFormData) {
                 data.quotes.map(quote => ({
                     reading_id: readingId,
                     text: quote.text,
-                    page:quote.page ?? null
+                    page:quote.page ?? null,
+                    notes:quote.notes || null
                 }))
             );
         if (error) throw error;

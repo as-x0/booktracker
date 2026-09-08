@@ -22,6 +22,7 @@ interface EditingQuote {
     id?: string;
     text: string;
     page: number | null;
+    notes: string;
 }
 
 export default function QuotesDetailsSection({
@@ -39,14 +40,16 @@ export default function QuotesDetailsSection({
         setEditingQuote({
             id: quote.id,
             text: quote.text,
-            page: quote.page
+            page: quote.page,
+            notes: quote.notes ?? "",
         });
     }
 
     function handleAddQuote() {
         setEditingQuote({
             text: "",
-            page: null
+            page: null,
+            notes: ""
         });
     }
 
@@ -66,13 +69,15 @@ export default function QuotesDetailsSection({
                 await updateQuote(
                     editingQuote.id,
                     editingQuote.text,
-                    editingQuote.page
+                    editingQuote.page,
+                    editingQuote.notes,
                 );
             } else {
                 await createQuote(
                     readingId,
                     editingQuote.text,
-                    editingQuote.page
+                    editingQuote.page,
+                    editingQuote.notes,
                 );
             }
 
@@ -139,6 +144,21 @@ export default function QuotesDetailsSection({
                                     />
                                 </div>
 
+                                <div className="quote-edit-notes">
+                                    <label>
+                                        Notes
+                                    </label>
+
+                                    <textarea
+                                        value={editingQuote.notes}
+                                        onChange={(event) =>
+                                            setEditingQuote({
+                                                ...editingQuote,
+                                                notes: event.target.value
+                                            })
+                                        }
+                                    />
+                                </div>
                             </div>
 
                             <div className="quote-details-actions">
@@ -168,7 +188,6 @@ export default function QuotesDetailsSection({
                         className="quote-details"
                     >
                         <div className="quote-details-content">
-
                             <div
                                 className="quote-details-text"
                                 dangerouslySetInnerHTML={{
@@ -182,6 +201,11 @@ export default function QuotesDetailsSection({
                                 </p>
                             )}
 
+                            {quote.notes && (
+                                <p className="quote-details-notes">
+                                    <strong>Notes:</strong> {quote.notes}
+                                </p>
+                            )}
                         </div>
 
                         <div className="quote-details-actions">
@@ -200,7 +224,6 @@ export default function QuotesDetailsSection({
 
             {editingQuote && !editingQuote.id && (
                 <div className="quote-details">
-
                     <div className="quote-details-content">
 
                         <RichTextEditor
@@ -238,6 +261,21 @@ export default function QuotesDetailsSection({
                             />
                         </div>
 
+                        <div className="quote-edit-notes">
+                            <label>
+                                Notes
+                            </label>
+
+                            <textarea
+                                value={editingQuote.notes}
+                                onChange={(event) =>
+                                    setEditingQuote({
+                                        ...editingQuote,
+                                        notes: event.target.value
+                                    })
+                                }
+                            />
+                        </div>
                     </div>
 
                     <div className="quote-details-actions">
