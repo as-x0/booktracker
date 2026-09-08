@@ -1,5 +1,15 @@
 .quotes-details-section {
-    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.quotes-details-section h2 {
+    margin: 0;
 }
 
 .quote-details {
@@ -8,10 +18,9 @@
     align-items: flex-start;
 
     padding: 1rem;
-    margin-bottom: 1rem;
 
     border: 1px solid #ddd;
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
 .quote-details-content {
@@ -28,5 +37,7 @@
 }
 
 .quote-details-actions {
+    display: flex;
+    gap: 0.75rem;
     margin-left: 1rem;
 }

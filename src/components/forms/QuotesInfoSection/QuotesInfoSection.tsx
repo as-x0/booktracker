@@ -11,6 +11,8 @@ import type { ReadingFormData } from "../../../forms/ReadingForm/ReadingForm.tsx
 import RichTextEditor from "../../common/RichTextEditor/RichTextEditor.tsx";
 import Button from "../../common/Button";
 
+import "./QuotesInfoSection.css"
+
 interface QuotesSectionProps {
     control: Control<ReadingFormData>;
     register: UseFormRegister<ReadingFormData>;
