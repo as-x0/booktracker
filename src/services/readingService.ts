@@ -105,7 +105,8 @@ export async function getReadingById(id: string): Promise<ReadingWithDetails>{
                 series:series(*)
             ),
             status:reading_status(*),
-            reading_language:languages(*)
+            reading_language:languages(*),
+            quotes:quotes(*)
         `)
         .eq("id", id)
         .single();

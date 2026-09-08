@@ -1,0 +1,32 @@
+.quotes-details-section {
+    margin-top: 2rem;
+}
+
+.quote-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.quote-details-content {
+    flex: 1;
+}
+
+.quote-details-text {
+    margin-bottom: 0.5rem;
+}
+
+.quote-details-page {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.quote-details-actions {
+    margin-left: 1rem;
+}

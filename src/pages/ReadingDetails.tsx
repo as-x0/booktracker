@@ -6,6 +6,7 @@ import type { ReadingWithDetails } from "../types/ReadingWithDetails";
 
 import BookDetailsSection from "../components/details/BookDetailsSection/BookDetailsSection";
 import ReadingDetailsSection from "../components/details/ReadingDetailsSection/ReadingDetailsSection";
+import QuotesDetailsSection from "../components/details/QuotesDetailsSection/QuotesDetailsSection.tsx";
 import Button from "../components/common/Button.tsx";
 
 import "./ReadingDetails.css"
@@ -80,6 +81,12 @@ function ReadingDetails() {
 
             <ReadingDetailsSection
                 reading={reading}
+                onSaved={loadReading}
+            />
+
+            <QuotesDetailsSection
+                readingId={reading.id}
+                quotes={reading.quotes}
                 onSaved={loadReading}
             />
 
