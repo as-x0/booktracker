@@ -9,9 +9,11 @@ import {
 import Button from "../../components/common/Button";
 import BookInfoSection from "../../components/forms/BookInfoSection/BookInfoSection";
 import ReadingInfoSection from "../../components/forms/ReadingInfoSection/ReadingInfoSection";
+import QuotesInfoSection from "../../components/forms/QuotesInfoSection/QuotesInfoSection.tsx";
 
 import type { BookFormData } from "../../types/BookFormData.ts";
 import type { WishlistWithDetails } from "../../types/WishlistWithDetails.ts";
+import type { QuoteFormData } from "../../types/QuoteFormData.ts";
 
 import { saveReading } from "../../services/saveReading.ts";
 import { updateWishlist } from "../../services/wishlistService.ts";
@@ -32,6 +34,7 @@ export interface ReadingFormData extends BookFormData {
     review: string;
     characters: string;
     dnfReason: string;
+    quotes: QuoteFormData[];
 
     coverUrl: string;
 }
@@ -50,7 +53,8 @@ export default function ReadingForm({
         handleSubmit,
         setValue,
         watch,
-        reset
+        reset,
+        control
     } = useForm<ReadingFormData>({
         shouldUnregister: false
     });
@@ -138,6 +142,13 @@ export default function ReadingForm({
             register={register}
             setValue={setValue}
             watch={watch}
+        />
+
+        <QuotesInfoSection
+            control={control}
+            register={register}
+            watch={watch}
+            setValue={setValue}
         />
 
         {message && (

@@ -1,3 +1,5 @@
+import { supabase } from "../supabase/client.ts";
+
 import type { ReadingFormData } from "../forms/ReadingForm/ReadingForm";
 
 import { findOrCreateAuthor } from "./authorService";
@@ -57,6 +59,19 @@ export async function saveReading(data: ReadingFormData) {
         dnfReason:data.dnfReason || null,
         coverUrl: data.coverUrl || null
     });
+
+    if(data.quotes.length > 0) {
+        const { error } = await supabase
+            .from("quotes")
+            .insert(
+                data.quotes.map(quote => ({
+                    reading_id: readingId,
+                    text: quote.text,
+                    page:quote.page ?? null
+                }))
+            );
+        if (error) throw error;
+    }
 
     return readingId;
 }
