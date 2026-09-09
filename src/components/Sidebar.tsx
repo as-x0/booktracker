@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom"
 
 import {
@@ -13,11 +14,29 @@ import {
 import "./Sidebar.css"
 
 function Sidebar() {
+    const [collapsed, setCollapsed] = useState(false)
+
     return(
-        <aside className="sidebar">
-            <h2 className="sidebar-title">
-                📚 BookTracker
-            </h2>
+        <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
+            <div className="sidebar-header">
+                <h2 className="sidebar-title">
+                    📚
+                    <span>BookTracker</span>
+                </h2>
+            </div>
+
+            <button
+                type="button"
+                className="sidebar-toggle"
+                onClick={() => setCollapsed(!collapsed)}
+                aria-label={
+                    collapsed
+                        ? "Expand sidebar"
+                        : "Collapse sidebar"
+                }
+            >
+                {collapsed ? "›" : "‹"}
+            </button>
 
            <nav>
                 <NavLink to="/" className="sidebar-link">
