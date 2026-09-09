@@ -1,15 +1,36 @@
 import {useEffect, useState} from "react";
 
-import type {ReadingWithDetails} from "../types/ReadingWithDetails";
+import type { ReadingWithDetails } from "../types/ReadingWithDetails";
+import type { MonthlyGoalMonth } from "../types/MonthlyGoal.ts";
 
 import {getReadings} from "../services/readingService";
 
 import BookCard from "../components/BookCard";
 import GoalProgress from "../components/GoalProgress";
 
+import "./Home.css"
+
+const MONTLY_GOALS_STORAGE_KEY = "monthlyGoals";
+
 function Home() {
-    const [readings, setReadings]
-        = useState<ReadingWithDetails[]>([]);
+    const [readings, setReadings] = useState<ReadingWithDetails[]>([]);
+
+    const [monthlyGoals] =
+        useState<MonthlyGoalMonth[]>(() => {
+            const savedGoals = localStorage.getItem(
+                MONTLY_GOALS_STORAGE_KEY
+            );
+
+            if (!savedGoals) {
+                return [];
+            }
+
+            try {
+                return JSON.parse(savedGoals) as MonthlyGoalMonth[];
+            } catch {
+                return [];
+            }
+        });
 
     useEffect(()=>{
         async function loadReadings(){
@@ -39,6 +60,24 @@ function Home() {
             )
             .slice(0,3);
 
+    const currentMonth =
+        `${new Date().getFullYear()}-${String(
+            new Date().getMonth() + 1
+        ).padStart(2, "0")}`;
+    const currentMonthGoal =
+        monthlyGoals.find(
+            month => month.month === currentMonth
+        );
+    const activeGoalBooks =
+        currentMonthGoal?.books.filter(
+            book => book.title.trim() !== ""
+        ) ?? [];
+    const goalTarget = activeGoalBooks.length;
+    const goalCurrent =
+        activeGoalBooks.filter(
+            book => book.completed
+        ).length;
+
     return (
         <div>
             <h1>Home</h1>
@@ -61,10 +100,24 @@ function Home() {
 
             <section>
                 <h2>Monthly Goal</h2>
-                <GoalProgress
-                    current={3}
-                    target={5}
-                />
+
+                <div className="monthly-goal-home">
+                    <div className="monthly-goal-books">
+                        {activeGoalBooks.map(book => (
+                            <div key={book.id} className="monthly-goal-book">
+                                <strong>{book.title}</strong>
+                                {book.author && (
+                                    <span> — {book.author}</span>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+
+                    <GoalProgress
+                        current={goalCurrent}
+                        target={goalTarget}
+                    />
+                </div>
             </section>
 
             <section>
