@@ -6,6 +6,7 @@ import Home from "./pages/Home"
 import Books from "./pages/Books"
 import TBR from "./pages/TBR"
 import DNF from "./pages/DNF"
+import Quotes from "./pages/Quotes.tsx";
 import Goals from "./pages/Goals"
 import Statistics from "./pages/Statistics"
 import ReadingDetails from "./pages/ReadingDetails";
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/tbr" element={<TBR />} />
                     <Route path="/dnf" element={<DNF />} />
                     <Route path="/goals" element={<Goals />} />
+                    <Route path="/quotes" element={<Quotes />} />
                     <Route path="/statistics" element={<Statistics />} />
                     <Route path="/readings/:id" element={<ReadingDetails />}/>
                     <Route path="/tbr/:id" element={<WishlistDetails />}/>

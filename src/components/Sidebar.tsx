@@ -5,6 +5,7 @@ import {
     FaBook,
     FaList,
     FaBan,
+    FaQuoteLeft,
     FaBullseye,
     FaChartBar,
 } from "react-icons/fa"
@@ -27,7 +28,7 @@ function Sidebar() {
                 <NavLink to="/books" className="sidebar-link">
                     <FaBook />
                     <span>Books</span>
-              </NavLink>
+                </NavLink>
 
                 <NavLink to="/tbr" className="sidebar-link">
                     <FaList />
@@ -37,17 +38,22 @@ function Sidebar() {
                 <NavLink to="/dnf" className="sidebar-link">
                     <FaBan />
                     <span>DNF</span>
-              </NavLink>
+                </NavLink>
+
+                <NavLink to="/quotes" className="sidebar-link">
+                   <FaQuoteLeft />
+                   <span>Quotes</span>
+                </NavLink>
 
                 <NavLink to="/goals" className="sidebar-link">
                     <FaBullseye />
                     <span>Goals</span>
-               </NavLink>
+                </NavLink>
 
                 <NavLink to="/statistics" className="sidebar-link">
                     <FaChartBar />
                    <span>Statistics</span>
-               </NavLink>
+                </NavLink>
            </nav>
       </aside>
     )

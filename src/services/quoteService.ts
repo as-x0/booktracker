@@ -1,5 +1,7 @@
 import { supabase } from "../supabase/client";
 
+import type { QuoteWithDetails } from "../types/QuoteWithDetails.ts";
+
 export async function createQuote(
     readingId: string,
     text: string,
@@ -46,4 +48,25 @@ export async function updateQuote(
     }
 
     return data;
+}
+
+export async function getQuotes(): Promise<QuoteWithDetails[]> {
+    const { data, error } = await supabase
+        .from("quotes")
+        .select(`
+            *,
+            reading:readings(
+                *,
+                book:books(
+                    *,
+                    author:authors(*)
+                )
+            )
+        `);
+
+    if (error) {
+        throw error;
+    }
+
+    return data as QuoteWithDetails[];
 }

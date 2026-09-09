@@ -1,0 +1,15 @@
+.quote-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.quote-table th,
+.quote-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.quote-table th {
+    font-weight: bold;
+}
