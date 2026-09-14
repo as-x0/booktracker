@@ -121,6 +121,17 @@ create table wishlist (
 );
 alter table wishlist enable row level security;
 
+create table monthly_goals (
+    id uuid primary key default gen_random_uuid(),
+    month text not null,
+    title text not null default '',
+    author text not null default '',
+    completed boolean not null default false,
+    created_at timestamptz not null default now(),
+    updated_at timestamptz not null default now()
+);
+alter table monthly_goals enable row level security;
+
 ---------------------------------------------------------------------------------
 
 -- INSERT DATAS
@@ -243,7 +254,26 @@ for all
 using (true)
 with check (true);
 
+create policy "Allow read monthly goals"
+on monthly_goals
+for select
+    using (true);
 
+create policy "Allow insert monthly goals"
+on monthly_goals
+for insert
+with check (true);
+
+create policy "Allow update monthly goals"
+on monthly_goals
+for update
+    using (true)
+    with check (true);
+
+create policy "Allow delete monthly goals"
+on monthly_goals
+for delete
+using (true);
 
 ---------------------------------------------------------------------------------
 
