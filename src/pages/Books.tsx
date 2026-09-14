@@ -5,6 +5,7 @@ import type { ReadingWithDetails } from "../types/ReadingWithDetails.ts";
 import ReadingForm from "../forms/ReadingForm/ReadingForm.tsx";
 import BookTable from "../components/BookTable.tsx";
 import Button from "../components/common/Button.tsx";
+import FilterSelect from "../components/common/FilterSelect/FilterSelect.tsx";
 
 import { getReadings } from "../services/readingService.ts";
 
@@ -95,7 +96,7 @@ function Books() {
                 }
             </Button>
             {showForm && (
-                    <ReadingForm />
+                <ReadingForm />
             )}
 
             <div className="book-filters">
@@ -106,57 +107,26 @@ function Books() {
                     onChange={(event) => setSearch(event.target.value)}
                 />
 
-                <select
+                <FilterSelect
                     value={authorFilter}
-                    onChange={(event) => setAuthorFilter(event.target.value)}
-                >
-                    <option value="">All authors</option>
+                    options={authors}
+                    placeholder="All authors"
+                    onChange={setAuthorFilter}
+                />
 
-                    {
-                        authors.map(author => (
-                            <option
-                                key={author}
-                                value={author}
-                            >
-                                {author}
-                            </option>
-                        ))
-                    }
-                </select>
-
-                <select
+                <FilterSelect
                     value={genreFilter}
-                    onChange={(event) => setGenreFilter(event.target.value)}
-                >
-                    <option value="">All genres</option>
-                    {
-                        genres.map(genre => (
-                            <option
-                                key={genre}
-                                value={genre}
-                            >
-                                {genre}
-                            </option>
-                        ))
-                    }
-                </select>
+                    options={genres}
+                    placeholder="All genres"
+                    onChange={setGenreFilter}
+                />
 
-                <select
+                <FilterSelect
                     value={statusFilter}
-                    onChange={(event) => setStatusFilter(event.target.value)}
-                >
-                    <option value="">All status</option>
-                    {
-                        statuses.map(status => (
-                            <option
-                                key={status}
-                                value={status}
-                            >
-                                {status}
-                            </option>
-                        ))
-                    }
-                </select>
+                    options={statuses}
+                    placeholder="All Statuses"
+                    onChange={setGenreFilter}
+                />
 
                 {
                     hasFilters && (
