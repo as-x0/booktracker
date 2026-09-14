@@ -1,0 +1,75 @@
+.filter-select {
+    position: relative;
+    width: 180px;
+}
+
+.filter-select-box {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 42px;
+    padding: 0.6rem 0.8rem;
+
+    background: white;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-size: 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    text-align: left;
+}
+
+.filter-select-box:hover {
+    border-color: #c8c8c8;
+}
+
+.filter-select-arrow {
+    font-size: 0.7rem;
+    margin-left: 0.5rem;
+}
+
+.filter-select-list {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+
+    margin: 0;
+    padding: 4px 0;
+
+    list-style: none;
+
+    background: white;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+
+    max-height: 220px;
+    overflow-y: auto;
+
+    box-shadow:
+            0 4px 12px rgba(0, 0, 0, 0.12);
+
+    z-index: 100;
+}
+
+.filter-select-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.filter-select-item:hover {
+    background-color: #f3f4f6;
+}
+
+.filter-select-item:not(:last-child) {
+    border-bottom: 1px solid #eeeeee;
+}
+
+.filter-select-item.selected {
+    font-weight: 500;
+}
