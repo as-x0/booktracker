@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 
 import MonthlyGoalsTable from "../components/MonthlyGoalsTable";
 import type { MonthlyGoalMonth } from "../types/MonthlyGoal";
-import { getMonthlyGoals } from "../services/monthlyGoalService.ts";
+import {
+    getMonthlyGoals,
+    addMonthlyGoal,
+    updateMonthlyGoal,
+    deleteMonthlyGoal,
+} from "../services/monthlyGoalService.ts";
 
 function Goals() {
 
@@ -21,7 +26,7 @@ function Goals() {
         loadGoals();
     }, []);
 
-    function handleBookChange(
+    async function handleBookChange(
         monthIndex: number,
         bookId: string,
         field: "title" | "author" | "completed",
@@ -46,60 +51,68 @@ function Goals() {
                 };
             })
         );
+
+        try {
+            await updateMonthlyGoal(bookId, field, value);
+        } catch (error) {
+            console.error("Error updating monthly goal:", error);
+        }
     }
 
-    function handleAddBook(monthIndex: number) {
-        setMonthlyGoals((currentGoals) =>
-            currentGoals.map((month, index) => {
-                if (index !== monthIndex) {
-                    return month;
-                }
+    async function handleAddBook(monthIndex: number) {
+        const month = monthlyGoals[monthIndex];
 
-                return {
-                    ...month,
-                    books: [
-                        ...month.books,
-                        {
-                            id: crypto.randomUUID(),
-                            title: "",
-                            author: "",
-                            completed: false
-                        }
-                    ]
-                };
-            })
-        );
+        try {
+            const newBook = await addMonthlyGoal(
+                month.month,
+                "",
+                ""
+            );
+
+            setMonthlyGoals((currentGoals) =>
+                currentGoals.map((currentMonth, index) => {
+                    if (index !== monthIndex) {
+                        return currentMonth;
+                    }
+
+                    return {
+                        ...currentMonth,
+                        books: [
+                            ...currentMonth.books,
+                            newBook
+                        ]
+                    };
+                })
+            );
+        } catch (error) {
+            console.error("Error adding monthly goal:", error);
+        }
     }
 
-    function handleRemoveBook(
+    async function handleRemoveBook(
         monthIndex: number,
         bookId: string
     ) {
-        setMonthlyGoals((currentGoals) =>
-            currentGoals.map((month, index) => {
-                if (index !== monthIndex) {
-                    return month;
-                }
+        try {
+            await deleteMonthlyGoal(bookId);
 
-                const remainingBooks = month.books.filter(
-                    (book) => book.id !== bookId
-                );
+            setMonthlyGoals((currentGoals) =>
+                currentGoals.map((month, index) => {
+                    if (index !== monthIndex) {
+                        return month;
+                    }
 
-                return {
-                    ...month,
-                    books: remainingBooks.length > 0
-                        ? remainingBooks
-                        : [
-                            {
-                                id: crypto.randomUUID(),
-                                title: "",
-                                author: "",
-                                completed: false
-                            }
-                        ]
-                };
-            })
-        );
+                    return {
+                        ...month,
+                        books: month.books.filter(
+                            (book) => book.id !== bookId
+                        )
+                    };
+                })
+            );
+        } catch (error) {
+            console.error("Error deleting monthly goal:", error);
+        }
     }
 
     return (

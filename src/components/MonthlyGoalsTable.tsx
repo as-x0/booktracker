@@ -68,6 +68,27 @@ function MonthlyGoalsTable({
                     )
                     : 0;
 
+                if(month.books.length === 0) {
+                    return (
+                        <tr key={`${month.month}-empty`}>
+                            <td className="monthly-goals-month">
+                                {formatMonth(month.month)}
+                            </td>
+
+                            <td></td>
+                            <td></td>
+
+                            <td colSpan={3}>
+                                <Button
+                                    onClick={() => onAddBook(monthIndex)}
+                                >
+                                    +
+                                </Button>
+                            </td>
+                        </tr>
+                    );
+                }
+
                 const bookRows = month.books.map((book, bookIndex) => (
                     <tr key={book.id}>
 

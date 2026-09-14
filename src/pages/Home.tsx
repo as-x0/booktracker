@@ -4,41 +4,35 @@ import type { ReadingWithDetails } from "../types/ReadingWithDetails";
 import type { MonthlyGoalMonth } from "../types/MonthlyGoal.ts";
 
 import {getReadings} from "../services/readingService";
+import {getMonthlyGoals} from "../services/monthlyGoalService.ts";
 
 import BookCard from "../components/BookCard";
 import GoalProgress from "../components/GoalProgress";
 
 import "./Home.css"
 
-const MONTLY_GOALS_STORAGE_KEY = "monthlyGoals";
-
 function Home() {
     const [readings, setReadings] = useState<ReadingWithDetails[]>([]);
 
-    const [monthlyGoals] =
-        useState<MonthlyGoalMonth[]>(() => {
-            const savedGoals = localStorage.getItem(
-                MONTLY_GOALS_STORAGE_KEY
-            );
+    const [monthlyGoals, setMonthlyGoals] = useState<MonthlyGoalMonth[]>([]);
 
-            if (!savedGoals) {
-                return [];
-            }
-
+    useEffect(() => {
+        async function loadData() {
             try {
-                return JSON.parse(savedGoals) as MonthlyGoalMonth[];
-            } catch {
-                return [];
-            }
-        });
+                const [readingsData, goalsData] = await Promise.all([
+                    getReadings(),
+                    getMonthlyGoals()
+                ]);
 
-    useEffect(()=>{
-        async function loadReadings(){
-            const data = await getReadings();
-            setReadings(data);
+                setReadings(readingsData);
+                setMonthlyGoals(goalsData);
+            } catch (error) {
+                console.error("Error loading home data:", error);
+            }
         }
-        loadReadings();
-    },[]);
+
+        loadData();
+    }, []);
 
     const currentReading =
         readings.filter(

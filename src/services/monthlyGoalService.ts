@@ -12,6 +12,8 @@ export async function getMonthlyGoals(): Promise<MonthlyGoalMonth[]> {
         throw error;
     }
 
+    const currentYear = new Date().getFullYear();
+
     const goalsByMonth = new Map<string, MonthlyGoalBook[]>();
 
     data.forEach((goal) => {
@@ -27,12 +29,14 @@ export async function getMonthlyGoals(): Promise<MonthlyGoalMonth[]> {
         });
     });
 
-    return Array.from(goalsByMonth.entries()).map(
-        ([month, books]) => ({
+    return Array.from({ length: 12 }, (_, index) => {
+        const month = `${currentYear}-${String(index + 1).padStart(2, "0")}`;
+
+        return {
             month,
-            books
-        })
-    );
+            books: goalsByMonth.get(month) ?? []
+        };
+    });
 }
 
 export async function addMonthlyGoal(
