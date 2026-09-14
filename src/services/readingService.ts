@@ -76,7 +76,8 @@ export async function getReadings(): Promise<ReadingWithDetails[]>{
                 genre:genres(*),
                 original_language:languages(*)
             ),
-            status:reading_status(*)
+            status:reading_status(*),
+            reading_language:languages(*)
         `)
     .order("start_date", { ascending: true });
 

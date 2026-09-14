@@ -1,5 +1,4 @@
-import {useState} from "react";
-import {useEffect} from "react";
+import { useEffect, useMemo, useState} from "react";
 
 import type { ReadingWithDetails } from "../types/ReadingWithDetails.ts";
 
@@ -7,11 +6,18 @@ import ReadingForm from "../forms/ReadingForm/ReadingForm.tsx";
 import BookTable from "../components/BookTable.tsx";
 import Button from "../components/common/Button.tsx";
 
-import {getReadings} from "../services/readingService.ts";
+import { getReadings } from "../services/readingService.ts";
+
+import "./Books.css"
 
 function Books() {
     const [showForm, setShowForm] = useState(false);
     const [readings, setReadings] = useState<ReadingWithDetails[]>([]);
+
+    const [search, setSearch] = useState("");
+    const [authorFilter, setAuthorFilter] = useState("");
+    const [genreFilter, setGenreFilter] = useState("");
+    const [statusFilter, setStatusFilter] = useState("");
 
     useEffect(()=>{
         async function loadReadings(){
@@ -20,6 +26,60 @@ function Books() {
         }
         loadReadings();
     }, []);
+
+    const authors = useMemo(() => {
+        return [...new Set(
+            readings.map(reading => reading.book.author.name)
+        )].sort();
+    }, [readings]);
+
+    const genres = useMemo(() => {
+        return [...new Set(
+            readings
+                .map(reading => reading.book.genre?.name)
+                .filter((genre): genre is string => Boolean(genre))
+        )].sort();
+    }, [readings]);
+
+    const statuses = useMemo(() => {
+        return [...new Set(
+            readings.map((reading) => reading.status.name)
+        )].sort();
+    }, [readings]);
+
+    const filteredReadings = useMemo(() => {
+        const searchLower = search.toLowerCase().trim();
+
+        return readings.filter(reading => {
+            const matchesSearch = searchLower === "" || reading.book.title.toLowerCase().includes(searchLower);
+            const matchesAuthor = authorFilter === "" || reading.book.author.name === authorFilter;
+            const matchesGenre = genreFilter === "" || reading.book.genre?.name === genreFilter;
+            const matchesStatus = statusFilter === "" || reading.status.name === statusFilter;
+
+            return (
+                matchesSearch && matchesAuthor && matchesGenre && matchesStatus
+            );
+        });
+    }, [
+        readings,
+        search,
+        authorFilter,
+        genreFilter,
+        statusFilter,
+    ]);
+
+    function clearFilters(){
+        setSearch("");
+        setAuthorFilter("");
+        setGenreFilter("");
+        setStatusFilter("");
+    }
+
+    const hasFilters =
+        search !== "" ||
+        authorFilter !== "" ||
+        genreFilter !== "" ||
+        statusFilter !== "";
 
     return (
         <div>
@@ -34,15 +94,81 @@ function Books() {
                     : "New Reading"
                 }
             </Button>
-
-            {
-                showForm && (
+            {showForm && (
                     <ReadingForm />
-                )
-            }
+            )}
+
+            <div className="book-filters">
+                <input
+                    type="text"
+                    placeholder="Search by title"
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
+                />
+
+                <select
+                    value={authorFilter}
+                    onChange={(event) => setAuthorFilter(event.target.value)}
+                >
+                    <option value="">All authors</option>
+
+                    {
+                        authors.map(author => (
+                            <option
+                                key={author}
+                                value={author}
+                            >
+                                {author}
+                            </option>
+                        ))
+                    }
+                </select>
+
+                <select
+                    value={genreFilter}
+                    onChange={(event) => setGenreFilter(event.target.value)}
+                >
+                    <option value="">All genres</option>
+                    {
+                        genres.map(genre => (
+                            <option
+                                key={genre}
+                                value={genre}
+                            >
+                                {genre}
+                            </option>
+                        ))
+                    }
+                </select>
+
+                <select
+                    value={statusFilter}
+                    onChange={(event) => setStatusFilter(event.target.value)}
+                >
+                    <option value="">All status</option>
+                    {
+                        statuses.map(status => (
+                            <option
+                                key={status}
+                                value={status}
+                            >
+                                {status}
+                            </option>
+                        ))
+                    }
+                </select>
+
+                {
+                    hasFilters && (
+                        <Button onClick={clearFilters}>
+                            Clear filters
+                        </Button>
+                    )
+                }
+            </div>
 
             <BookTable
-                readings={readings}
+                readings={filteredReadings}
             />
 
         </div>
