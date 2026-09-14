@@ -2,51 +2,24 @@ import { useEffect, useState } from "react";
 
 import MonthlyGoalsTable from "../components/MonthlyGoalsTable";
 import type { MonthlyGoalMonth } from "../types/MonthlyGoal";
-
-const MONTHLY_GOALS_STORAGE_KEY = "monthlyGoals";
-
-function createDefaultMonthlyGoals(): MonthlyGoalMonth[] {
-    const currentYear = new Date().getFullYear();
-
-    return Array.from({ length: 12 }, (_, index) => ({
-        month: `${currentYear}-${String(index + 1).padStart(2, "0")}`,
-        books: [
-            {
-                id: crypto.randomUUID(),
-                title: "",
-                author: "",
-                completed: false
-            }
-        ]
-    }));
-}
+import { getMonthlyGoals } from "../services/monthlyGoalService.ts";
 
 function Goals() {
 
-    const [monthlyGoals, setMonthlyGoals] = useState<MonthlyGoalMonth[]>(
-        () => {
-            const savedGoals = localStorage.getItem(
-                MONTHLY_GOALS_STORAGE_KEY
-            );
-
-            if (!savedGoals) {
-                return createDefaultMonthlyGoals();
-            }
-
-            try {
-                return JSON.parse(savedGoals) as MonthlyGoalMonth[];
-            } catch {
-                return createDefaultMonthlyGoals();
-            }
-        }
-    );
+    const [monthlyGoals, setMonthlyGoals] = useState<MonthlyGoalMonth[]>([]);
 
     useEffect(() => {
-        localStorage.setItem(
-            MONTHLY_GOALS_STORAGE_KEY,
-            JSON.stringify(monthlyGoals)
-        );
-    }, [monthlyGoals]);
+        async function loadGoals() {
+            try {
+                const data = await getMonthlyGoals();
+                setMonthlyGoals(data);
+            } catch (error) {
+                console.error("Error loading monthly goals:", error);
+            }
+        }
+
+        loadGoals();
+    }, []);
 
     function handleBookChange(
         monthIndex: number,
