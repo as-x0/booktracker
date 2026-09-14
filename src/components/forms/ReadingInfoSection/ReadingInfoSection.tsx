@@ -40,7 +40,9 @@ export default function ReadingInfoSection({
     const isDnf = selectedStatus?.name === "DNF";
 
     const [languageQuery, setLanguageQuery] = useState("");
+    console.log("LANGUAGE QUERY:", languageQuery);
     const languages = useLanguages(languageQuery);
+    console.log("LANGUAGES:", languages);
 
     const rating = watch("rating");
 
@@ -78,7 +80,10 @@ export default function ReadingInfoSection({
                     <AutocompleteInput
                         label="Reading language"
                         options={languages}
-                        onQueryChange={(query)=>{setLanguageQuery(query);}}
+                        value={languageQuery}
+                        onQueryChange={(query)=> {
+                            setLanguageQuery(query);
+                        }}
                         onSelect={(language)=>{
                             setValue(
                                 "readingLanguageId",
