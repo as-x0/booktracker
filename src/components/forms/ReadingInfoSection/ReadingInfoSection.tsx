@@ -85,6 +85,7 @@ export default function ReadingInfoSection({
                             setLanguageQuery(query);
                         }}
                         onSelect={(language)=>{
+                            setLanguageQuery(language.name)
                             setValue(
                                 "readingLanguageId",
                                 language.id
