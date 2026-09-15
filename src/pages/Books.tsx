@@ -125,7 +125,7 @@ function Books() {
                     value={statusFilter}
                     options={statuses}
                     placeholder="All Statuses"
-                    onChange={setGenreFilter}
+                    onChange={setStatusFilter}
                 />
 
                 {
