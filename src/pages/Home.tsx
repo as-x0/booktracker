@@ -3,11 +3,12 @@ import {useEffect, useState} from "react";
 import type { ReadingWithDetails } from "../types/ReadingWithDetails";
 import type { MonthlyGoalMonth } from "../types/MonthlyGoal.ts";
 
-import {getReadings} from "../services/readingService";
-import {getMonthlyGoals} from "../services/monthlyGoalService.ts";
+import { getReadings } from "../services/readingService";
+import { getMonthlyGoals } from "../services/monthlyGoalService.ts";
 
 import BookCard from "../components/BookCard";
 import GoalProgress from "../components/GoalProgress";
+import PageProgress from "../components/PageProgress";
 
 import "./Home.css"
 
@@ -82,10 +83,16 @@ function Home() {
                     currentReading.map(
                         reading => (
 
-                            <BookCard
-                                key={reading.id}
-                                reading={reading}
-                            />
+                            <div key={reading.id}>
+                                <BookCard
+                                    reading={reading}
+                                />
+
+                                <PageProgress
+                                    current={reading.pages_read ?? 0}
+                                    total={reading.pages_tot ?? 0}
+                                />
+                            </div>
 
                         )
                     )
